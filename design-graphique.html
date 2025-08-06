@@ -1,148 +1,255 @@
+
+donc, sur ce code : 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Design Graphique & Identité Visuelle – CloCréative</title>
-  <meta name="description" content="Boostez votre image avec notre service de design graphique. Logo, identité visuelle, supports print, et accompagnement personnalisé pour une communication percutante." />
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Design Graphique – CloCréative</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --primary: #ff70f1;
+      --dark: #000;
+      --light: #fff;
+      --gray: #f5f5f5;
+    }
+
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: white;
+      font-family: "Poppins", sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
     }
-    header {
-      background-color: black;
-      color: white;
+
+    nav {
+      background: var(--dark);
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 10px 30px;
+      padding: 15px 5%;
       position: fixed;
       top: 0;
       width: 100%;
       z-index: 1000;
+      box-sizing: border-box;
     }
-    header nav {
-      display: flex;
-      gap: 20px;
-    }
-    header nav a {
-      color: white;
+
+    nav h2 a {
+      color: var(--primary);
       text-decoration: none;
-      font-weight: 500;
-    }
-    header .search-bar {
+      font-size: 1.8rem;
       margin-right: auto;
     }
-    header img.logo {
-      height: 40px;
+
+    .nav-links {
+      margin: 0 auto;
     }
-    .banner {
-      width: 100%;
-      height: 60vh;
-      background-image: url('assets/photos/apropos-banniere.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      margin-top: 70px;
-      position: relative;
-    }
-    .banner::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-    main {
-      padding: 60px 30px;
-      max-width: 1200px;
-      margin: auto;
-    }
-    section {
-      margin-bottom: 60px;
-    }
-    section h2 {
-      font-size: 2em;
-      margin-bottom: 20px;
-    }
-    .content-row {
+
+    nav ul {
+      list-style: none;
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
+      margin: 0;
+      padding: 0;
       gap: 30px;
     }
-    .content-row img {
-      flex: 1 1 300px;
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
+
+    nav ul li a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+      padding: 5px 0;
+      position: relative;
     }
-    .content-row p {
-      flex: 2 1 400px;
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: var(--primary);
     }
-    footer {
-      background-color: black;
-      color: white;
+
+    nav ul li a.active::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary);
+    }
+
+    /* Bannière */
+    .about-header {
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: 20px;
+      padding: 0 20px;
+      margin-top: 60px;
+      background: linear-gradient(
+          rgba(0, 0, 0, 0.6),
+          rgba(0, 0, 0, 0.6)
+        ),
+        url("assets/photos/design-graphique-banniere.png") center/cover no-repeat;
+      color: white;
+    }
+
+    .about-header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+    }
+
+    .about-header p {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .page-content {
+      padding: 80px 5%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .page-section h2 {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: var(--primary);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #e85cd6;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="search-bar">🔍</div>
-    <nav>
-      <a href="index.html">Accueil</a>
-      <a href="services.html">Services</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <img src="assets/photos/logo-clocreative-blanc.png" alt="CloCréative Logo" class="logo">
-  </header>
+  <!-- Navigation -->
+  <nav>
+    <h2><a href="index.html">CloCréative</a></h2>
+    <div class="nav-links">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+        <li><a href="index.html#services" class="active">Services</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
 
-  <div class="banner"></div>
+  <!-- Bannière -->
+  <div class="about-header">
+    <div>
+      <h1>Design Graphique</h1>
+      <p>Création de visuels impactants & identité visuelle</p>
+    </div>
+  </div>
 
-  <main>
-    <section>
-      <h2>Identité visuelle</h2>
-      <div class="content-row">
-        <img src="assets/photos/design-graphique-IDvisuelle.png" alt="Identité visuelle">
-        <p>Une identité visuelle forte est essentielle pour se démarquer et véhiculer vos valeurs. CloCréative vous accompagne dans la création ou la refonte de votre univers graphique : choix des couleurs, typographies, éléments graphiques, déclinaisons visuelles, etc.</p>
+  <!-- Contenu principal -->
+  <div class="page-content">
+    <section class="page-section">
+      <h2>Ce que nous proposons</h2>
+      <p>
+        Logos, flyers, cartes de visite, visuels réseaux sociaux… CloCréative vous accompagne
+        dans la création de tous vos supports de communication visuelle.
+      </p>
+      <a href="index.html#contact" class="btn">Demander un devis</a>
+    </section>
+  </div>
+</body>
+</html>
+
+ajoute ça : 
+  <main class="container">
+    <h1>Design graphique</h1>
+    <h2 class="texte-reduit">Création de visuels divers pour vos campagnes e-mailings, vos publications sur les réseaux sociaux, votre identité de marque...</h2>
+
+    <div class="photo-block banner">
+      <img src="assets/photos/banniere-design.png" alt="Bannière design graphique CloCréative" />
+    </div>
+
+    <section class="section-block">
+      <div class="text-block">
+        <h2>Création d’identité visuelle personnalisée</h2>
+        <p>
+          L’identité visuelle va bien au-delà du simple logo : elle regroupe tous les éléments graphiques qui expriment la personnalité, les valeurs et le positionnement de votre entreprise...
+        </p>
+        <p>
+          En optant pour une création graphique sur mesure, vous bénéficiez d’un design original, pensé pour votre secteur d’activité...
+        </p>
+        <p><a href="apropos.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">En savoir plus...</a></p>
+      </div>
+      <div class="photo-block">
+        <img src="assets/photos/design-graphique-IDvisuelle.png" alt="design-graphique-IDvisuelle" class="img-resize" />
       </div>
     </section>
 
-    <section>
-      <h2>Création de logo</h2>
-      <div class="content-row">
-        <img src="assets/photos/design-graphique-logo.png" alt="Création de logo">
-        <p>Le logo est l’élément central de votre identité de marque. Il doit être unique, mémorable et adapté à vos cibles. Je crée des logos sur-mesure, en cohérence avec votre positionnement, vos valeurs et vos supports de communication.</p>
+    <section class="section-block reverse">
+      <div class="text-block">
+        <h2>Conception de logos professionnels et modernes</h2>
+        <p>
+          Le logo représente le cœur de votre identité visuelle. Il doit être simple, mémorable et refléter l’essence de votre marque...
+        </p>
+        <p>
+          Notre processus créatif inclut une analyse approfondie de votre secteur, la recherche de concepts originaux...
+        </p>
+        <p><a href="apropos.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">En savoir plus...</a></p>
+      </div>
+      <div class="photo-block">
+        <img src="assets/photos/design-graphique-logo.png" alt="design-graphique-logo.png" class="img-resize" />
       </div>
     </section>
 
-    <section>
-      <h2>Supports print</h2>
-      <div class="content-row">
-        <img src="assets/photos/design-graphique-print.png" alt="Supports print">
-        <p>Cartes de visite, flyers, plaquettes, affiches… Je conçois vos supports imprimés avec un design cohérent, esthétique et percutant, pour une communication professionnelle et impactante.</p>
+    <section class="section-block">
+      <div class="text-block">
+        <h2>Supports imprimés et communication papier de qualité</h2>
+        <p>
+          Malgré la montée du digital, les supports imprimés conservent une place importante dans la communication...
+        </p>
+        <p>
+          Nous réalisons des supports print créatifs et efficaces, parfaitement alignés avec votre identité visuelle...
+        </p>
+        <p><a href="apropos.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">En savoir plus...</a></p>
+        <p><a href="contact.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">Contactez-nous pour un devis personnalisé</a></p>
+      </div>
+      <div class="photo-block">
+        <img src="assets/photos/design-graphique-print.png" alt="design-graphique-print.png" class="img-resize" />
       </div>
     </section>
 
-    <section>
-      <h2>Accompagnement personnalisé</h2>
-      <div class="content-row">
-        <img src="assets/photos/design-graphique-accompagnement.png" alt="Accompagnement design">
-        <p>Je vous accompagne dans l’élaboration et l’évolution de votre stratégie visuelle. Grâce à une écoute attentive et une expertise créative, je vous propose des solutions graphiques adaptées à vos objectifs et à votre public cible.</p>
+    <section class="section-block reverse">
+      <div class="text-block">
+        <h2>Accompagnement complet en design graphique personnalisé</h2>
+        <p>
+          En choisissant CloCréative Design, vous bénéficiez d’un suivi personnalisé, de la conception jusqu’à la livraison finale...
+        </p>
+        <ul>
+          <li>Augmentez votre visibilité et votre notoriété</li>
+          <li>Construisez une image professionnelle et cohérente</li>
+          <li>Attirez et fidélisez votre clientèle cible</li>
+        </ul>
+        <p><a href="apropos.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">En savoir plus...</a></p>
+      </div>
+      <div class="photo-block banner">
+        <img src="assets/photos/desgin-graphique-perso.png" alt="desgin-graphique-perso" />
       </div>
     </section>
   </main>
 
   <footer>
-    &copy; 2025 CloCréative. Tous droits réservés.
+    <p>&copy; 2025 CloCréative Design. Tous droits réservés.</p>
   </footer>
 </body>
 </html>
