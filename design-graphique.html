@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Design Graphique & Identité Visuelle – CloCréative</title>
   <meta name="description" content="Boostez votre image de marque avec CloCréative Design : création de logos professionnels, identité visuelle personnalisée et supports imprimés de qualité pour une communication visuelle impactante." />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --primary: #FF70F1;
@@ -25,12 +25,11 @@
       font-family: 'Poppins', sans-serif;
       background-color: var(--light);
       color: var(--dark);
-      line-height: 1.7;
+      line-height: 1.6;
       padding-top: 95px; /* espace nav fixe */
       font-size: 18px;
     }
 
-    /* Navigation identique à index */
     nav {
       background: var(--dark);
       display: flex;
@@ -70,21 +69,29 @@
 
     nav ul li a {
       font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 500;
-      letter-spacing: 0.02em;
       color: var(--light);
       text-decoration: none;
-      transition: color 0.3s ease;
-      line-height: 1.2;
-      padding: 6px 8px;
-      white-space: nowrap;
+      transition: color 0.3s;
+      padding: 5px 0;
+      position: relative;
     }
 
     nav ul li a:hover,
     nav ul li a.active {
       color: var(--primary);
       font-weight: 600;
+    }
+
+    nav ul li a.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary);
     }
 
     .search-bar input[type="search"] {
@@ -102,7 +109,7 @@
       box-shadow: 0 0 8px var(--primary);
     }
 
-    /* Bannière en fond avec image design-graphique-banniere.png */
+    /* Bannière avec image de fond et texte centré */
     .about-header {
       height: 60vh;
       display: flex;
@@ -110,149 +117,57 @@
       justify-content: center;
       text-align: center;
       padding: 0 20px;
-      margin: 50px 0 30px; /* espacement avant/après */
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+      margin-top: 60px;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
                   url('assets/photos/design-graphique-banniere.png') center/cover no-repeat;
       color: white;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       user-select: none;
     }
 
     .about-header h1 {
-      font-size: 3rem;
-      margin: 0;
+      font-size: 3.5rem;
+      margin-bottom: 20px;
       font-weight: 700;
-      line-height: 1.1;
     }
 
     .about-header p {
-      font-size: 1.2rem;
-      margin-top: 10px;
+      font-size: 1.3rem;
+      margin: 0;
       font-weight: 400;
     }
 
     main.container {
       max-width: 900px;
-      margin: 0 auto 80px;
+      margin: 40px auto 80px;
       padding: 0 20px;
     }
 
+    h1, h2, h3, p, ul {
+      margin: 0 0 20px 0;
+      font-weight: 400;
+    }
+
     h1 {
-      font-size: 2rem;
       color: var(--primary);
-      margin: 0 0 10px 0;
       font-weight: 700;
-      line-height: 1.2;
+      font-size: 2rem;
     }
 
     h2 {
-      font-size: 1.3rem;
       color: var(--primary);
-      margin: 0 0 25px 0;
       font-weight: 600;
-      line-height: 1.3;
-    }
-
-    h3 {
-      font-size: 1.6rem;
-      color: var(--primary);
-      margin-top: 40px;
-      margin-bottom: 15px;
-      font-weight: 600;
-    }
-
-    p {
-      margin-bottom: 25px;
-      font-weight: 400;
-    }
-
-    ul {
-      margin-left: 25px;
-      margin-bottom: 30px;
-      font-weight: 400;
-    }
-
-    ul li {
-      margin-bottom: 12px;
-    }
-
-    .section-block {
-      display: flex;
-      align-items: stretch;
-      gap: 50px;
-      margin-bottom: 70px;
-      flex-wrap: wrap;
-    }
-
-    .section-block.reverse {
-      flex-direction: row-reverse;
-    }
-
-    .text-block {
-      flex: 1 1 400px;
-    }
-
-    .photo-block {
-      flex: 1 1 350px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #888;
-      font-size: 1.3rem;
-      font-style: italic;
-      text-align: center;
-      user-select: none;
-      margin-top: 15px;
-      margin-bottom: 15px;
-    }
-
-    .photo-block img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      border-radius: 5px;
-    }
-
-    .section-block .photo-block {
-      margin-left: 20px;
-    }
-
-    .section-block.reverse .photo-block {
-      margin-left: 0;
-      margin-right: 20px;
-    }
-
-    /* Correction : images trop longues */
-    img.img-resize {
-      max-height: 300px;
-      object-fit: cover;
-      object-position: center;
+      font-size: 1.4rem;
     }
 
     .texte-reduit {
-      font-size: 20px;
+      font-size: 1.2rem;
       font-style: italic;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 400;
       color: var(--primary);
+      margin-bottom: 40px;
     }
 
-    @media (max-width: 850px) {
-      .section-block {
-        flex-direction: column;
-        gap: 30px;
-      }
-      .section-block.reverse {
-        flex-direction: column;
-      }
-      .photo-block {
-        width: 100%;
-        height: auto;
-        margin-left: 0;
-        margin-right: 0;
-      }
+    ul {
+      padding-left: 20px;
     }
 
     footer {
@@ -276,13 +191,7 @@
       <ul>
         <li><a href="index.html">Accueil</a></li>
         <li><a href="apropos.html">À propos</a></li>
-        <li class="dropdown">
-          <a href="#services">Services ▾</a>
-          <ul class="dropdown-menu">
-            <li><a href="design-graphique.html" class="active">Design graphique</a></li>
-          </ul>
-        </li>
-        <li><a href="#boutique">Boutique</a></li>
+        <li><a href="#services">Services</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -295,7 +204,7 @@
   <!-- Bannière avec image en fond -->
   <div class="about-header">
     <div>
-      <h1>Design graphique</h1>
+      <h1>Design Graphique</h1>
       <p>Création de visuels impactants et identité visuelle personnalisée</p>
     </div>
   </div>
@@ -303,72 +212,7 @@
   <main class="container">
     <h2 class="texte-reduit">Création de visuels divers pour vos campagnes e-mailings, vos publications sur les réseaux sociaux, votre identité de marque...</h2>
 
-    <section class="section-block">
-      <div class="text-block">
-        <h2>Création d’identité visuelle personnalisée</h2>
-        <p>
-          L’identité visuelle va bien au-delà du simple logo : elle regroupe tous les éléments graphiques qui expriment la personnalité, les valeurs et le positionnement de votre entreprise...
-        </p>
-        <p>
-          En optant pour une création graphique sur mesure, vous bénéficiez d’un design original, pensé pour votre secteur d’activité...
-        </p>
-        <p><a href="apropos.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">En savoir plus...</a></p>
-      </div>
-      <div class="photo-block">
-        <img src="assets/photos/design-graphique-IDvisuelle.png" alt="design-graphique-IDvisuelle" class="img-resize" />
-      </div>
-    </section>
-
-    <section class="section-block reverse">
-      <div class="text-block">
-        <h2>Conception de logos professionnels et modernes</h2>
-        <p>
-          Le logo représente le cœur de votre identité visuelle. Il doit être simple, mémorable et refléter l’essence de votre marque...
-        </p>
-        <p>
-          Notre processus créatif inclut une analyse approfondie de votre secteur, la recherche de concepts originaux...
-        </p>
-        <p><a href="apropos.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">En savoir plus...</a></p>
-      </div>
-      <div class="photo-block">
-        <img src="assets/photos/design-graphique-logo.png" alt="design-graphique-logo.png" class="img-resize" />
-      </div>
-    </section>
-
-    <section class="section-block">
-      <div class="text-block">
-        <h2>Supports imprimés et communication papier de qualité</h2>
-        <p>
-          Malgré la montée du digital, les supports imprimés conservent une place importante dans la communication...
-        </p>
-        <p>
-          Nous réalisons des supports print créatifs et efficaces, parfaitement alignés avec votre identité visuelle...
-        </p>
-        <p><a href="apropos.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">En savoir plus...</a></p>
-        <p><a href="contact.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">Contactez-nous pour un devis personnalisé</a></p>
-      </div>
-      <div class="photo-block">
-        <img src="assets/photos/design-graphique-print.png" alt="design-graphique-print.png" class="img-resize" />
-      </div>
-    </section>
-
-    <section class="section-block reverse">
-      <div class="text-block">
-        <h2>Accompagnement complet en design graphique personnalisé</h2>
-        <p>
-          En choisissant CloCréative Design, vous bénéficiez d’un suivi personnalisé, de la conception jusqu’à la livraison finale...
-        </p>
-        <ul>
-          <li>Augmentez votre visibilité et votre notoriété</li>
-          <li>Construisez une image professionnelle et cohérente</li>
-          <li>Attirez et fidélisez votre clientèle cible</li>
-        </ul>
-        <p><a href="apropos.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">En savoir plus...</a></p>
-      </div>
-      <div class="photo-block banner">
-        <img src="assets/photos/desgin-graphique-perso.png" alt="desgin-graphique-perso" />
-      </div>
-    </section>
+    <!-- Ton contenu ici -->
   </main>
 
   <footer>
