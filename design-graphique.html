@@ -102,10 +102,39 @@
       box-shadow: 0 0 8px var(--primary);
     }
 
-    /* Styles page Design Graphique (extraits de ton code) */
+    /* Bannière en fond avec image design-graphique-banniere.png */
+    .about-header {
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      margin: 50px 0 30px; /* espacement avant/après */
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                  url('assets/photos/design-graphique-banniere.png') center/cover no-repeat;
+      color: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      user-select: none;
+    }
+
+    .about-header h1 {
+      font-size: 3rem;
+      margin: 0;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .about-header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      font-weight: 400;
+    }
+
     main.container {
       max-width: 900px;
-      margin: 60px auto 80px;
+      margin: 0 auto 80px;
       padding: 0 20px;
     }
 
@@ -146,24 +175,6 @@
 
     ul li {
       margin-bottom: 12px;
-    }
-
-    /* Bannière image réelle */
-    .banner {
-      margin: 50px 0 30px;
-    }
-
-    .banner img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-      max-height: 300px;
-      object-position: center;
-      user-select: none;
-      margin-bottom: 20px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
 
     .section-block {
@@ -280,16 +291,17 @@
       <input type="search" placeholder="Rechercher..." aria-label="Recherche" />
     </div>
   </nav>
-  
-  <div style="height: 60vh; background: url('assets/photos/apropos-banniere.png') center/cover no-repeat;"></div>
+
+  <!-- Bannière avec image en fond -->
+  <div class="about-header">
+    <div>
+      <h1>Design graphique</h1>
+      <p>Création de visuels impactants et identité visuelle personnalisée</p>
+    </div>
+  </div>
 
   <main class="container">
-    <h1>Design graphique</h1>
     <h2 class="texte-reduit">Création de visuels divers pour vos campagnes e-mailings, vos publications sur les réseaux sociaux, votre identité de marque...</h2>
-
-    <div class="photo-block banner">
-      <img src="assets/photos/design-graphique-banniere.png" alt="Bannière design graphique CloCréative" />
-    </div>
 
     <section class="section-block">
       <div class="text-block">
@@ -364,4 +376,3 @@
   </footer>
 </body>
 </html>
-
