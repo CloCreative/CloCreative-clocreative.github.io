@@ -147,7 +147,6 @@
 
     .photo-block img {
       width: 100%;
-      height: auto;
       border-radius: 8px;
     }
 
@@ -155,13 +154,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 40px;
-      margin-bottom: 80px;
+      gap: 0; /* suppression de l'espace entre texte et image */
+      margin-bottom: 20px;
       flex-wrap: wrap;
-    }
-    /* Réduction du gap seulement sur la première section */
-    .section-block.first {
-      gap: 15px;
     }
 
     .section-block.reverse {
@@ -174,12 +169,30 @@
 
     .photo-block {
       flex: 1 1 400px;
+      margin: 0;
     }
 
+    /* IMAGES carrées réduites */
     .img-resize {
-      max-width: 100%;
-      height: auto;
+      width: 60%;
+      max-width: 300px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
       border-radius: 8px;
+      background-color: #fff;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .text-block p {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .text-block ul {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-left: 1.2em;
     }
 
     footer {
@@ -229,7 +242,7 @@
 
   <!-- Sections design graphique -->
   <main class="container">
-    <section class="section-block first">
+    <section class="section-block">
       <div class="text-block">
         <h2>Création d’identité visuelle personnalisée</h2>
         <p>L’identité visuelle va bien au-delà du simple logo : elle regroupe tous les éléments graphiques qui expriment la personnalité, les valeurs et le positionnement de votre entreprise...</p>
