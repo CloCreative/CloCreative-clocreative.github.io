@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Réseaux Sociaux – CloCréative</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #FF70F1;
+      --dark: #000;
+      --light: #fff;
+      --gray: #f5f5f5;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    h2 {
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    nav {
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 5%;
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      z-index: 1000;
+      box-sizing: border-box;
+      gap: 20px;
+    }
+
+    nav h2 {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      height: 75px;
+    }
+
+    nav h2 img {
+      max-height: 85px;
+      margin: auto 0;
+      display: block;
+    }
+
+    .nav-links {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: var(--primary);
+    }
+
+    nav ul li.dropdown {
+      position: relative;
+    }
+
+    nav ul li .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--dark);
+      padding: 10px 0;
+      border-radius: 0 0 10px 10px;
+      display: none;
+      min-width: 200px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+
+    nav ul li:hover .dropdown-menu {
+      display: block;
+    }
+
+    nav ul li .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: var(--light);
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    nav ul li .dropdown-menu li a:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar input[type="search"] {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+      width: 180px;
+      transition: width 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .search-bar input[type="search"]:focus {
+      width: 220px;
+      box-shadow: 0 0 6px var(--primary);
+    }
+
+    body {
+      padding-top: 95px;
+    }
+
+    .about-header {
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      background: linear-gradient(
+          rgba(0, 0, 0, 0.6),
+          rgba(0, 0, 0, 0.6)
+        ),
+        url("assets/photos/reseaux-sociaux-banniere.png") center/cover no-repeat;
+      color: white;
+    }
+
+    .about-header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+    }
+
+    .about-header p {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .page-content {
+      padding: 1% 5% 0 5%;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-title {
+      margin: 0 0 20px 0;
+      font-size: 2rem;
+      color: var(--primary);
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: var(--primary);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #e85cd6;
+    }
+
+    main.container {
+      padding: 50px 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .photo-block img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .section-block {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .section-block.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .text-block {
+      flex: 1 1 400px;
+    }
+
+    .photo-block {
+      flex: 1 1 400px;
+    }
+
+    .img-resize {
+      width: 80%;
+      max-width: 400px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer {
+      background: var(--gray);
+      text-align: center;
+      padding: 20px;
+      color: #444;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <h2>
+      <img src="assets/photos/logo.png" alt="Logo CloCréative" />
+    </h2>
+
+    <div class="nav-links">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+        <li class="dropdown">
+          <a href="index.html#services" class="active">Services ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="design-graphique.html">Design graphique</a></li>
+            <li><a href="web-design.html">Web Design</a></li>
+            <li><a href="reseaux-sociaux.html" class="active">Réseaux Sociaux</a></li>
+          </ul>
+        </li>
+        <li><a href="#boutique">Boutique</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="search-bar">
+      <input type="search" placeholder="Rechercher..." aria-label="Recherche" />
+    </div>
+  </nav>
+
+  <!-- Bannière -->
+  <div class="about-header">
+    <div>
+      <h1>Réseaux Sociaux</h1>
+      <p>Stratégie et création de contenu social</p>
+    </div>
+  </div>
+
+  <!-- Contenu principal -->
+  <div class="page-content">
+    <h2 class="section-title">Ce que nous proposons</h2>
+    <p>
+      Élaboration de stratégies adaptées, création de contenus engageants et gestion des communautés pour développer votre présence sur les réseaux sociaux.
+    </p>
+    <a href="index.html#contact" class="btn">Demandez un devis</a>
+  </div>
+
+  <!-- Sections Réseaux Sociaux -->
+  <main class="container">
+    <section class="section-block">
+      <div class="text-block">
+        <h2>Stratégie social media sur-mesure</h2>
+        <p>Analyse de votre marché, définition des objectifs et choix des plateformes adaptées pour maximiser votre impact.</p>
+        <p><a href="apropos.html">En savoir plus...</a></p>
+      </div>
+      <div class="photo-block">
+        <img src="assets/photos/reseaux-sociaux-statregy.png" alt="Stratégie réseaux sociaux" class="img-resize" />
+      </div>
+    </section>
+
+    <section class="section-block reverse">
+      <div class="text-block">
+        <h2>Création de contenu engageant</h2>
+        <p>Conception de visuels, vidéos, et textes adaptés à votre audience pour susciter interaction et fidélisation.</p>
+        <p><a href="apropos.html">En savoir plus...</a></p>
+      </div>
+      <div class="photo-block">
+        <img src="assets/photos/reseaux-sociaux-contenu.png" alt="Création de contenu social" class="img-resize" />
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="text-block">
+        <h2>Gestion et animation de communauté</h2>
+        <p>Modération, réponses, animation et analyse des performances pour maintenir une relation durable avec vos abonnés.</p>
+        <p><a href="apropos.html">En savoir plus...</a></p>
+      </div>
+      <div class="photo-block">
+        <img src="assets/photos/reseaux-sociaux-animation.png" alt="Gestion communauté" class="img-resize" />
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 CloCréative Design. Tous droits réservés.</p>
+  </footer>
+</body>
+</html>
