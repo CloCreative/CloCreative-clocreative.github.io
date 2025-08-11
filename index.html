@@ -16,11 +16,11 @@
     html, body {
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
       font-family: 'Poppins', sans-serif;
       background: var(--light);
       color: var(--dark);
       line-height: 1.6;
+      /* overflow-x: hidden; */ /* désactivé pour éviter problèmes d'affichage */
     }
 
     h2 {
@@ -158,12 +158,15 @@
       margin-bottom: 20px;
     }
 
-    .video-hero iframe {
+    /* Suppression iframe YouTube, ajout style vidéo */
+    .video-hero video {
       position: absolute;
       top: 50%;
       left: 50%;
-      border: none;
-      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
       z-index: 0;
     }
 
@@ -434,14 +437,12 @@
     </div>
   </nav>
 
-  <!-- Bannière vidéo YouTube -->
+  <!-- Bannière vidéo locale -->
   <div class="video-hero">
-    <iframe
-      src="https://www.youtube.com/embed/2_xsuwssMFA?autoplay=1&mute=1&loop=1&playlist=2_xsuwssMFA&controls=0&showinfo=0&modestbranding=1&rel=0"
-      title="Bannière Vidéo"
-      allow="autoplay; encrypted-media"
-      allowfullscreen
-    ></iframe>
+    <video autoplay muted loop playsinline>
+      <source src="assets/videos/banniere-accueil.mp4" type="video/mp4" />
+      Votre navigateur ne supporte pas la vidéo.
+    </video>
     <div class="hero-content">
       <h1>CloCréative Design</h1>
       <p>Solutions créatives pour votre communication digitale</p>
@@ -507,28 +508,5 @@
       <a href="#" aria-label="Instagram">📸</a>
     </div>
   </footer>
-
-  <script>
-    const iframe = document.querySelector('.video-hero iframe');
-    function resizeIframe() {
-      const container = document.querySelector('.video-hero');
-      const containerWidth = container.offsetWidth;
-      const containerHeight = container.offsetHeight;
-      const aspectRatio = 16 / 9;
-      let iframeWidth = containerWidth;
-      let iframeHeight = containerWidth / aspectRatio;
-      if (iframeHeight < containerHeight) {
-        iframeHeight = containerHeight;
-        iframeWidth = containerHeight * aspectRatio;
-      }
-      iframe.style.width = iframeWidth + 'px';
-      iframe.style.height = iframeHeight + 'px';
-      iframe.style.top = '50%';
-      iframe.style.left = '50%';
-      iframe.style.transform = 'translate(-50%, -50%)';
-    }
-    window.addEventListener('resize', resizeIframe);
-    window.addEventListener('load', resizeIframe);
-  </script>
 </body>
 </html>
