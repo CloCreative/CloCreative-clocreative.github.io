@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mailings – CloCréative Design</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #FF70F1;
+      --dark: #000;
+      --light: #fff;
+      --gray: #f5f5f5;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    h2 {
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    nav {
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 5%;
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      z-index: 1000;
+      box-sizing: border-box;
+      gap: 20px;
+    }
+
+    nav h2 {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      height: 75px;
+    }
+
+    nav h2 img {
+      max-height: 85px;
+      margin: auto 0;
+      display: block;
+    }
+
+    .nav-links {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: var(--primary);
+    }
+
+    /* Dropdown menu */
+    nav ul li.dropdown {
+      position: relative;
+    }
+
+    nav ul li .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--dark);
+      padding: 10px 0;
+      border-radius: 0 0 10px 10px;
+      display: none;
+      min-width: 200px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+
+    nav ul li:hover .dropdown-menu {
+      display: block;
+    }
+
+    nav ul li .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: var(--light);
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    nav ul li .dropdown-menu li a:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar input[type="search"] {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+      width: 180px;
+      transition: width 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .search-bar input[type="search"]:focus {
+      width: 220px;
+      box-shadow: 0 0 6px var(--primary);
+    }
+
+    body {
+      padding-top: 95px;
+    }
+
+    /* Bannière */
+    .about-header {
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      margin-top: 0;
+      background: linear-gradient(
+          rgba(0, 0, 0, 0.6),
+          rgba(0, 0, 0, 0.6)
+        ),
+        url("assets/photos/mailing-banniere.png") center/cover no-repeat;
+      color: white;
+    }
+
+    .about-header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+    }
+
+    .about-header p {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    /* Suppression espace au-dessus de "Ce que nous proposons" */
+    .page-content {
+      padding: 1% 5% 0 5%;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .texte-reduit {
+      font-size: 0.95rem;
+      font-weight: 400;
+      margin-bottom: 40px;
+      color: #555;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+
+    /* Ajustement titre et bouton */
+    .section-title {
+      margin: 0 0 10px 0;
+      font-size: 2rem;
+      color: var(--primary);
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 30px;
+      margin-bottom: 0; /* Suppression espace sous bouton */
+      padding: 10px 20px;
+      background-color: var(--primary);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #e85cd6;
+    }
+
+    main.container {
+      padding: 50px 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Section avec image à côté du texte */
+    .section-block {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .text-block {
+      flex: 1 1 400px;
+      min-width: 300px;
+    }
+
+    .photo-block {
+      flex: 1 1 300px;
+      min-width: 250px;
+    }
+
+    .img-resize {
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 8px;
+      background-color: #fff;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .text-block p {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .text-block ul {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-left: 1.2em;
+    }
+
+    /* FAQ */
+    .faq details {
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+
+    .faq summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: var(--primary);
+      outline: none;
+    }
+
+    .faq summary:hover {
+      color: #e85cd6;
+    }
+
+    footer {
+      background: var(--gray);
+      text-align: center;
+      padding: 20px;
+      color: #444;
+      font-size: 0.9rem;
+    }
+
+    a {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <h2>
+      <img src="assets/photos/logo.png" alt="Logo CloCréative" />
+    </h2>
+
+    <div class="nav-links">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+        <li class="dropdown">
+          <a href="index.html#services" class="active">Services ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="mailings.html" class="active">Mailings</a></li>
+          </ul>
+        </li>
+        <li><a href="#boutique">Boutique</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="search-bar">
+      <input type="search" placeholder="Rechercher..." aria-label="Recherche" />
+    </div>
+  </nav>
+
+  <!-- Bannière -->
+  <div class="about-header">
+    <div>
+      <h1>Mailings</h1>
+      <p>Campagnes ciblées pour votre communication</p>
+    </div>
+  </div>
+
+  <!-- Contenu principal -->
+  <div class="page-content">
+    <h2 class="section-title">Ce que nous proposons</h2>
+    <p class="texte-reduit">
+      Chez <strong>CloCréative Design</strong>, nous concevons des campagnes de mailings sur mesure adaptées à vos objectifs de communication.  
+      Que ce soit une annonce institutionnelle, une offre commerciale, un message informatif, une présentation vitrine ou un contenu personnalisé,  
+      nous adaptons le design, le contenu et la structure pour maximiser l’impact de vos envois et engager vos destinataires.
+      <br><br>
+      Nous mettons un point d’honneur à créer des campagnes emailing optimisées pour un affichage responsive, garantissant une expérience fluide sur tous les supports : desktop, tablette, et mobile.  
+      L’utilisation de techniques avancées de segmentation vous permet de cibler précisément votre audience pour un meilleur taux d’ouverture et un engagement accru.
+      <br><br>
+      Nos campagnes email sont conçues selon les meilleures pratiques SEO et marketing digital, intégrant des objets accrocheurs, un contenu personnalisé, et des appels à l’action efficaces, afin de renforcer votre image de marque et d’augmenter votre conversion.
+    </p>
+    <a href="index.html#contact" class="btn">Demandez un devis</a>
+  </div>
+
+  <!-- Sections mailings -->
+  <main class="container">
+    <section class="section-block">
+      <div class="text-block">
+        <h2>Les différents types de mailings</h2>
+        <ul>
+          <li><strong>Mailing institutionnel :</strong> Partage d’informations officielles, bilans annuels, rapports d’activité.</li>
+          <li><strong>Mailing commercial :</strong> Promotions, ventes privées, codes promo.</li>
+          <li><strong>Mailing informatif :</strong> Nouvelles internes, annonces de changements, événements à venir.</li>
+          <li><strong>Mailing vitrine :</strong> Présentation d’un nouveau produit ou service avec visuels attractifs.</li>
+          <li><strong>Mailing personnalisé :</strong> Messages ciblés selon les centres d’intérêt et le profil du destinataire.</li>
+        </ul>
+      </div>
+      <div class="photo-block">
+        <img src="assets/photos/mailing-mail.png" alt="Types de mailings" class="img-resize" />
+      </div>
+    </section>
+
+    <section class="faq">
+      <h2>FAQ sur les mailings</h2>
+
+      <details>
+        <summary>Quelle est la différence entre un mailing et une newsletter ?</summary>
+        <p>Un mailing est souvent ponctuel et ciblé, tandis qu'une newsletter est régulière et informative.</p>
+      </details>
+
+      <details>
+        <summary>Quel est le meilleur moment pour envoyer un mailing ?</summary>
+        <p>Généralement en milieu de semaine et en fin de matinée pour maximiser le taux d'ouverture.</p>
+      </details>
+
+      <details>
+        <summary>Combien d’éléments doit contenir un mailing efficace ?</summary>
+        <p>Idéalement un objet clair, un visuel principal, un texte concis et un appel à l’action fort.</p>
+      </details>
+
+      <details>
+        <summary>Peut-on personnaliser chaque mailing ?</summary>
+        <p>Oui, la personnalisation (nom, préférences, historique d’achat) augmente considérablement l’engagement.</p>
+      </details>
+
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 CloCréative Design. Tous droits réservés.</p>
+  </footer>
+</body>
+</html>
