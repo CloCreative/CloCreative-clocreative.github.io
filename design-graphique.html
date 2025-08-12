@@ -7,41 +7,58 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --primary: #ff70f1;
+      --primary: #FF70F1;
       --dark: #000;
       --light: #fff;
       --gray: #f5f5f5;
     }
 
-    body {
+    html, body {
       margin: 0;
-      font-family: "Poppins", sans-serif;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
       background: var(--light);
       color: var(--dark);
       line-height: 1.6;
+    }
+
+    h2 {
+      margin-top: 0;
+      padding-top: 0;
     }
 
     nav {
       background: var(--dark);
       display: flex;
       align-items: center;
-      padding: 15px 5%;
+      justify-content: space-between;
+      padding: 10px 5%;
       position: fixed;
       top: 0;
-      width: 100%;
+      width: 100vw;
       z-index: 1000;
       box-sizing: border-box;
+      gap: 20px;
     }
 
-    nav h2 a {
-      color: var(--primary);
-      text-decoration: none;
-      font-size: 1.8rem;
-      margin-right: auto;
+    nav h2 {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      height: 75px;
+    }
+
+    nav h2 img {
+      max-height: 85px;
+      margin: auto 0;
+      display: block;
     }
 
     .nav-links {
-      margin: 0 auto;
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
     }
 
     nav ul {
@@ -50,6 +67,11 @@
       margin: 0;
       padding: 0;
       gap: 30px;
+      align-items: center;
+    }
+
+    nav ul li {
+      position: relative;
     }
 
     nav ul li a {
@@ -58,8 +80,7 @@
       font-weight: 500;
       font-size: 1.1rem;
       transition: color 0.3s;
-      padding: 5px 0;
-      position: relative;
+      white-space: nowrap;
     }
 
     nav ul li a:hover,
@@ -67,14 +88,66 @@
       color: var(--primary);
     }
 
-    nav ul li a.active::after {
-      content: "";
+    /* Dropdown menu */
+    nav ul li.dropdown {
+      position: relative;
+    }
+
+    nav ul li .dropdown-menu {
       position: absolute;
-      bottom: 0;
+      top: 100%;
       left: 0;
-      width: 100%;
-      height: 2px;
+      background: var(--dark);
+      padding: 10px 0;
+      border-radius: 0 0 10px 10px;
+      display: none;
+      min-width: 200px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+
+    nav ul li:hover .dropdown-menu,
+    nav ul li:focus-within .dropdown-menu {
+      display: block;
+    }
+
+    nav ul li .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: var(--light);
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    nav ul li .dropdown-menu li a:hover {
       background: var(--primary);
+      color: white;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar input[type="search"] {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+      width: 180px;
+      transition: width 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .search-bar input[type="search"]:focus {
+      width: 220px;
+      box-shadow: 0 0 6px var(--primary);
+    }
+
+    body {
+      padding-top: 95px;
     }
 
     /* Bannière */
@@ -85,7 +158,7 @@
       justify-content: center;
       text-align: center;
       padding: 0 20px;
-      margin-top: 60px;
+      margin-top: 0;
       background: linear-gradient(
           rgba(0, 0, 0, 0.6),
           rgba(0, 0, 0, 0.6)
@@ -104,14 +177,17 @@
       margin: 0;
     }
 
+    /* Suppression espace au-dessus de "Ce que nous proposons" */
     .page-content {
-      padding: 80px 5%;
+      padding: 1% 5% 0 5%;
       max-width: 1000px;
       margin: 0 auto;
+      text-align: center;
     }
 
+    /* Ajustement titre et bouton */
     .section-title {
-      margin: 10px 0 20px 0;
+      margin: 0 0 10px 0;
       font-size: 2rem;
       color: var(--primary);
       text-align: center;
@@ -120,6 +196,7 @@
     .btn {
       display: inline-block;
       margin-top: 30px;
+      margin-bottom: 0; /* Suppression espace sous bouton */
       padding: 10px 20px;
       background-color: var(--primary);
       color: white;
@@ -127,6 +204,7 @@
       font-weight: 600;
       border-radius: 5px;
       transition: background-color 0.3s;
+      cursor: pointer;
     }
 
     .btn:hover {
@@ -154,7 +232,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0; /* suppression de l'espace entre texte et image */
+      gap: 0;
       margin-bottom: 20px;
       flex-wrap: wrap;
     }
@@ -172,10 +250,10 @@
       margin: 0;
     }
 
-    /* IMAGES carrées réduites */
+    /* IMAGES carrées élargies */
     .img-resize {
-      width: 60%;
-      max-width: 300px;
+      width: 80%;
+      max-width: 400px;
       aspect-ratio: 1 / 1;
       object-fit: cover;
       border-radius: 8px;
@@ -189,6 +267,7 @@
       margin-top: 0;
       margin-bottom: 0;
     }
+
     .text-block ul {
       margin-top: 0;
       margin-bottom: 0;
@@ -211,14 +290,35 @@
 <body>
   <!-- Navigation -->
   <nav>
-    <h2><a href="index.html">CloCréative</a></h2>
+    <h2>
+      <a href="index.html" aria-label="Accueil CloCréative">
+        <img src="assets/photos/logo.png" alt="Logo CloCréative" />
+      </a>
+    </h2>
+
     <div class="nav-links">
       <ul>
         <li><a href="index.html">Accueil</a></li>
         <li><a href="apropos.html">À propos</a></li>
-        <li><a href="index.html#services" class="active">Services</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
+        <li class="dropdown">
+          <a href="#" aria-haspopup="true" aria-expanded="false">Services ▾</a>
+          <ul class="dropdown-menu" aria-label="Sous-menu Services">
+            <li><a href="design-graphique.html" class="active">Design graphique</a></li>
+            <li><a href="mailing.html">Mailing</a></li>
+            <li><a href="montage-video.html">Montage vidéo</a></li>
+            <li><a href="newsletter.html">Newsletter</a></li>
+            <li><a href="reseaux-sociaux.html">Réseaux sociaux</a></li>
+            <li><a href="web-design.html">Web Design</a></li>
+          </ul>
+        </li>
+        <li><a href="boutique.html">Boutique</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
+    </div>
+
+    <div class="search-bar">
+      <input type="search" placeholder="Rechercher..." aria-label="Recherche" />
     </div>
   </nav>
 
@@ -237,7 +337,7 @@
       Logos, flyers, cartes de visite, visuels réseaux sociaux… CloCréative vous accompagne
       dans la création de tous vos supports de communication visuelle.
     </p>
-    <a href="index.html#contact" class="btn">Demander un devis</a>
+    <a href="index.html#contact" class="btn">Demandez un devis</a>
   </div>
 
   <!-- Sections design graphique -->

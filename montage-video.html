@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Montage vidéo – CloCréative Design</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #FF70F1;
+      --dark: #000;
+      --light: #fff;
+      --gray: #f5f5f5;
+      --text-muted: #555;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* === MENU CSS copié de l'accueil === */
+    nav {
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 5%;
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      z-index: 1000;
+      box-sizing: border-box;
+      gap: 20px;
+    }
+
+    nav h2 {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      height: 75px;
+    }
+
+    nav h2 img {
+      max-height: 85px;
+      margin: auto 0;
+      display: block;
+    }
+
+    .nav-links {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: var(--primary);
+    }
+
+    nav ul li.dropdown {
+      position: relative;
+    }
+
+    nav ul li .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--dark);
+      padding: 10px 0;
+      border-radius: 0 0 10px 10px;
+      display: none;
+      min-width: 200px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+
+    nav ul li:hover .dropdown-menu {
+      display: block;
+    }
+
+    nav ul li .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: var(--light);
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    nav ul li .dropdown-menu li a:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar input[type="search"] {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+      width: 180px;
+      transition: width 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .search-bar input[type="search"]:focus {
+      width: 220px;
+      box-shadow: 0 0 6px var(--primary);
+    }
+
+    /* === FIN MENU CSS === */
+
+    body {
+      padding-top: 95px;
+    }
+
+    /* --- le reste de ton CSS spécifique à cette page --- */
+    /* Bannière */
+    .about-header {
+      height: 55vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      background: linear-gradient(
+          rgba(0, 0, 0, 0.5),
+          rgba(0, 0, 0, 0.5)
+        ),
+        url("assets/photos/montage-video-banniere.png") center/cover no-repeat;
+      color: white;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    .about-header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.3em;
+      letter-spacing: 1.5px;
+    }
+
+    .about-header p {
+      margin: 0 auto;
+      max-width: 600px;
+      font-weight: 400;
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .page-content {
+      padding: 30px 5% 0 5%;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .texte-reduit {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 40px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .section-title {
+      font-size: 2.4rem;
+      color: var(--primary);
+      margin-bottom: 25px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      background-color: var(--primary);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 112, 241, 0.4);
+      margin-bottom: 60px;
+    }
+
+    .btn:hover {
+      background-color: #e85cd6;
+      box-shadow: 0 6px 15px rgba(232, 92, 214, 0.6);
+    }
+
+    main.container {
+      max-width: 1200px;
+      margin: 0 auto 60px auto;
+      padding: 0 5%;
+    }
+
+    .section-block {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    .section-block.reverse {
+      direction: rtl;
+    }
+
+    .section-block.reverse > * {
+      direction: ltr;
+    }
+
+    .text-block {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .text-block h2 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .text-block ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0;
+    }
+
+    .text-block ul li {
+      margin-bottom: 20px;
+    }
+
+    .text-block ul li strong {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .text-block ul li p {
+      margin: 0 0 0 20px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .photo-block img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      object-fit: cover;
+      aspect-ratio: 16 / 9;
+      display: block;
+    }
+
+    /* FAQ */
+    .faq {
+      max-width: 800px;
+      margin: 0 auto 80px auto;
+    }
+
+    .faq h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .faq details {
+      background: var(--gray);
+      padding: 18px 20px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+
+    .faq summary {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--primary);
+      outline: none;
+      list-style: none;
+      user-select: none;
+    }
+
+    .faq summary:hover {
+      color: #e85cd6;
+    }
+
+    footer {
+      background: var(--gray);
+      text-align: center;
+      padding: 25px 10px;
+      color: #444;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      font-weight: 400;
+    }
+
+    a {
+      color: var(--primary);
+    }
+
+    @media (max-width: 700px) {
+      .section-block {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .section-block.reverse {
+        direction: ltr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <h2>
+      <a href="index.html" aria-label="Accueil CloCréative">
+        <img src="assets/photos/logo.png" alt="Logo CloCréative" />
+      </a>
+    </h2>
+
+    <div class="nav-links">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+        <li class="dropdown">
+          <a href="#" aria-haspopup="true" aria-expanded="false" class="active">Services ▾</a>
+          <ul class="dropdown-menu" aria-label="Sous-menu Services">
+            <li><a href="design-graphique.html">Design graphique</a></li>
+            <li><a href="mailing.html">Mailing</a></li>
+            <li><a href="montage-video.html" class="active">Montage vidéo</a></li>
+            <li><a href="newsletter.html">Newsletter</a></li>
+            <li><a href="reseaux-sociaux.html">Réseaux sociaux</a></li>
+            <li><a href="web-design.html">Web Design</a></li>
+          </ul>
+        </li>
+        <li><a href="boutique.html">Boutique</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="search-bar">
+      <input type="search" placeholder="Rechercher..." aria-label="Recherche" />
+    </div>
+  </nav>
+
+  <!-- Bannière -->
+  <div class="about-header">
+    <div>
+      <h1>Montage vidéo</h1>
+      <p>Création et montage de vidéos sur mesure pour tous vos projets</p>
+    </div>
+  </div>
+
+  <!-- Contenu principal -->
+  <div class="page-content">
+    <h2 class="section-title">Ce que nous proposons</h2>
+    <p class="texte-reduit">
+      Chez <strong>CloCréative Design</strong>, nous réalisons le montage vidéo professionnel qui valorise votre image et capte l’attention de votre audience.  
+      Que vous ayez besoin de vidéos promotionnelles, de contenus pour les réseaux sociaux, de clips événementiels ou de tutoriels, nous accompagnons chaque étape, de la conception à la livraison finale.  
+      <br><br>
+      Nous utilisons des outils et logiciels performants pour garantir un rendu fluide, dynamique et conforme à votre identité visuelle.  
+      Le montage inclut l’ajout d’effets, transitions, habillages graphiques, sous-titrages et optimisation audio, pour un impact maximal.  
+      <br><br>
+      Notre équipe est à l’écoute de vos besoins pour créer des vidéos adaptées à votre cible et à vos objectifs, que ce soit pour booster votre communication digitale ou renforcer votre storytelling.
+    </p>
+    <a href="index.html#contact" class="btn">Demandez un devis</a>
+  </div>
+
+  <!-- Sections montage vidéo -->
+  <main class="container">
+    <section class="section-block">
+      <div class="photo-block">
+        <img src="assets/photos/montage-video-presta.png" alt="Montage vidéo prestations" />
+      </div>
+      <div class="text-block">
+        <h2>Nos prestations en montage vidéo</h2>
+        <ul>
+          <li>
+            <strong>Montage promotionnel :</strong>
+            <p>Vidéos courtes pour publicité, réseaux sociaux et campagnes marketing.</p>
+          </li>
+          <li>
+            <strong>Vidéos événementielles :</strong>
+            <p>Captation et montage d’événements, conférences, lancements.</p>
+          </li>
+          <li>
+            <strong>Tutoriels et formations :</strong>
+            <p>Vidéos pédagogiques claires et engageantes.</p>
+          </li>
+          <li>
+            <strong>Motion design :</strong>
+            <p>Intégration d’animations graphiques et effets visuels.</p>
+          </li>
+          <li>
+            <strong>Montage et étalonnage :</strong>
+            <p>Ajustement des couleurs, sons et rythmes pour un rendu professionnel.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section-block reverse">
+      <div class="photo-block">
+        <img src="assets/photos/montage-video-processus.png" alt="Processus de montage vidéo" />
+      </div>
+      <div class="text-block">
+        <h2>Notre processus de travail</h2>
+        <ul>
+          <li>
+            <strong>Brief et collecte :</strong>
+            <p>Analyse de vos besoins et collecte des rushs vidéo.</p>
+          </li>
+          <li>
+            <strong>Montage initial :</strong>
+            <p>Assemblage des séquences avec découpage et ajustements.</p>
+          </li>
+          <li>
+            <strong>Revue et retours :</strong>
+            <p>Validation avec vous pour ajustements éventuels.</p>
+          </li>
+          <li>
+            <strong>Finitions :</strong>
+            <p>Ajout d’effets, tr

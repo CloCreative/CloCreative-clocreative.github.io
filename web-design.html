@@ -88,6 +88,7 @@
       color: var(--primary);
     }
 
+    /* Dropdown menu */
     nav ul li.dropdown {
       position: relative;
     }
@@ -266,7 +267,9 @@
   <!-- Navigation -->
   <nav>
     <h2>
-      <img src="assets/photos/logo.png" alt="Logo CloCréative" />
+      <a href="index.html" aria-label="Accueil CloCréative">
+        <img src="assets/photos/logo.png" alt="Logo CloCréative" />
+      </a>
     </h2>
 
     <div class="nav-links">
@@ -274,14 +277,19 @@
         <li><a href="index.html">Accueil</a></li>
         <li><a href="apropos.html">À propos</a></li>
         <li class="dropdown">
-          <a href="index.html#services" class="active">Services ▾</a>
-          <ul class="dropdown-menu">
+          <a href="#" aria-haspopup="true" aria-expanded="false" class="active">Services ▾</a>
+          <ul class="dropdown-menu" aria-label="Sous-menu Services">
             <li><a href="design-graphique.html">Design graphique</a></li>
+            <li><a href="mailing.html">Mailing</a></li>
+            <li><a href="montage-video.html">Montage vidéo</a></li>
+            <li><a href="newsletter.html">Newsletter</a></li>
+            <li><a href="reseaux-sociaux.html">Réseaux sociaux</a></li>
             <li><a href="web-design.html" class="active">Web Design</a></li>
           </ul>
         </li>
-        <li><a href="#boutique">Boutique</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="boutique.html">Boutique</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
 

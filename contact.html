@@ -2,9 +2,9 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CloCréative Design</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --primary: #FF70F1;
@@ -12,18 +12,159 @@
       --dark: #000;
       --light: #fff;
       --gray: rgba(245, 245, 245, 0.85);
-      --overlay: linear-gradient(45deg, rgba(148, 0, 211, 0.5), rgba(255, 112, 241, 0.5));
+      --overlay: linear-gradient(45deg, rgba(148, 0, 211, 0.6), rgba(255, 112, 241, 0.5));
     }
 
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       font-family: 'Poppins', sans-serif;
+      background: transparent; /* Pour ne pas masquer la vidéo */
       color: var(--light);
       line-height: 1.6;
       overflow-x: hidden;
+      /* padding-top supprimé ici */
     }
 
-    /* Fond vidéo pour toute la page */
+    h1, h2, h3 {
+      color: var(--primary);
+      margin-top: 0;
+    }
+
+    /* Navigation - MENU du 1er code */
+    nav {
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 5%;
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      z-index: 1000;
+      box-sizing: border-box;
+      gap: 20px;
+    }
+
+    nav h2 {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      height: 75px;
+    }
+
+    nav h2 a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--light);
+    }
+
+    nav h2 img {
+      max-height: 85px;
+      margin: auto 0;
+      display: block;
+    }
+
+    .nav-links {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+      white-space: nowrap;
+      padding: 5px 8px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: var(--primary);
+      background: rgba(255, 112, 241, 0.2);
+    }
+
+    /* Dropdown menu */
+    nav ul li.dropdown {
+      position: relative;
+      cursor: pointer;
+    }
+
+    nav ul li .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--dark);
+      padding: 10px 0;
+      border-radius: 0 0 10px 10px;
+      display: none;
+      min-width: 200px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+
+    nav ul li:hover .dropdown-menu {
+      display: block;
+    }
+
+    nav ul li .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: var(--light);
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    nav ul li .dropdown-menu li a:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Search bar */
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar input[type="search"] {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+      width: 180px;
+      transition: width 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+    }
+
+    .search-bar input[type="search"]:focus {
+      width: 220px;
+      box-shadow: 0 0 6px var(--primary);
+    }
+
+    /* Fond vidéo */
     .video-background {
       position: fixed;
       top: 0;
@@ -50,62 +191,15 @@
       position: relative;
       z-index: 1;
       background: rgba(0, 0, 0, 0.7);
+      min-height: 100vh;
+      padding-bottom: 60px;
+      padding-top: 95px; /* décalage sous le menu */
     }
 
-    /* Navigation */
-    nav {
-      background: rgba(0, 0, 0, 0.8);
-      display: flex;
-      align-items: center;
-      padding: 15px 5%;
-      position: fixed;
-      top: 0;
-      width: 90%;
-      z-index: 1000;
-      backdrop-filter: blur(5px);
-      border-bottom: 1px solid var(--primary);
-    }
-
-    nav h2 {
-      color: var(--primary);
-      margin: 0;
-      margin-right: auto;
-      font-size: 1.8rem;
-    }
-
-    nav .nav-links {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      margin: 0;
-      padding: 0;
-      gap: 30px;
-    }
-
-    nav ul li a {
-      color: var(--light);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1.1rem;
-      transition: all 0.3s;
-      padding: 5px 10px;
-      border-radius: 5px;
-    }
-
-    nav ul li a:hover {
-      color: var(--primary);
-      background: rgba(255, 112, 241, 0.2);
-    }
-
-    /* Sections */
-    section {
-      padding: 100px 5%;
-      margin-top: 70px;
+    /* Section Contact du 2e code */
+    section.contact {
+      padding: 80px 5%;
+      text-align: center;
     }
 
     .section-container {
@@ -128,16 +222,7 @@
       width: 5px;
       height: 100%;
       background: var(--primary);
-    }
-
-    h1, h2, h3 {
-      color: var(--primary);
-    }
-
-    /* Section Contact */
-    .contact {
-      padding: 80px 5%;
-      text-align: center;
+      border-radius: 15px 0 0 15px;
     }
 
     .contact-container {
@@ -157,6 +242,7 @@
       background: rgba(255, 255, 255, 0.9);
       border-radius: 15px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      color: var(--dark);
     }
 
     .contact-method {
@@ -179,6 +265,7 @@
       padding: 30px;
       border-radius: 15px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      color: var(--dark);
     }
 
     .form-group {
@@ -203,6 +290,7 @@
       font-family: 'Poppins', sans-serif;
       font-size: 1rem;
       background: rgba(255, 255, 255, 0.8);
+      color: var(--dark);
     }
 
     .submit-btn {
@@ -227,25 +315,30 @@
     /* Responsive */
     @media (max-width: 768px) {
       nav {
-        flex-direction: column;
-        padding: 15px;
-        width: 100%;
+        flex-wrap: wrap;
+        padding: 15px 5%;
+        width: 100vw;
+        justify-content: center;
+        gap: 10px;
       }
 
       nav h2 {
-        margin-right: 0;
-        margin-bottom: 15px;
+        height: auto;
+        margin: 0;
       }
 
-      nav .nav-links {
-        position: static;
-        transform: none;
+      .nav-links {
+        flex-grow: unset;
         width: 100%;
+        order: 2;
+        display: flex;
+        justify-content: center;
       }
 
       nav ul {
         flex-direction: column;
         gap: 10px;
+        align-items: center;
       }
 
       .contact-container {
@@ -254,6 +347,17 @@
 
       .contact-info, .contact-form {
         min-width: 100%;
+      }
+
+      .search-bar {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      .search-bar input[type="search"] {
+        width: 90%;
       }
     }
   </style>
@@ -268,128 +372,104 @@
   </div>
 
   <div class="content-overlay">
-    <nav>
-      <h2>CloCréative</h2>
+    <!-- MENU du 1er code -->
+    <nav aria-label="Menu principal">
+      <h2>
+        <a href="index.html" aria-label="Accueil CloCréative">
+          <img src="assets/photos/logo.png" alt="Logo CloCréative" />
+        </a>
+      </h2>
+
       <div class="nav-links">
         <ul>
-          <li><a href="#accueil">Accueil</a></li>
-          <li><a href="#prestations">Prestations</a></li>
-          <li><a href="#apropos">À propos</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="index.html" class="active" aria-current="page">Accueil</a></li>
+          <li><a href="apropos.html">À propos</a></li>
+          <li class="dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Services ▾</a>
+            <ul class="dropdown-menu" aria-label="Sous-menu Services">
+              <li><a href="design-graphique.html">Design graphique</a></li>
+              <li><a href="mailing.html">Mailing</a></li>
+              <li><a href="montage-video.html">Montage vidéo</a></li>
+              <li><a href="newsletter.html">Newsletter</a></li>
+              <li><a href="reseaux-sociaux.html">Réseaux sociaux</a></li>
+              <li><a href="web-design.html">Web Design</a></li>
+            </ul>
+          </li>
+          <li><a href="boutique.html">Boutique</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
+      </div>
+
+      <div class="search-bar">
+        <input type="search" placeholder="Rechercher..." aria-label="Recherche" />
       </div>
     </nav>
 
-    <!-- Section Contact -->
+    <!-- CORPS du 2e code (section contact améliorée) -->
     <section class="contact" id="contact">
       <div class="section-container">
         <h2>Contactez-nous</h2>
         <p>Prêt à concrétiser votre projet ? Discutons-en !</p>
-        
+
         <div class="contact-container">
           <div class="contact-info">
             <h3>Nos coordonnées</h3>
-            
+
             <div class="contact-method">
               <span class="contact-icon">📧</span>
               <div>
-                <strong>Email</strong><br>
+                <strong>Email</strong><br />
                 contact@clocreative.com
               </div>
             </div>
-            
+
             <div class="contact-method">
               <span class="contact-icon">📱</span>
               <div>
-                <strong>Téléphone</strong><br>
+                <strong>Téléphone</strong><br />
                 +33 6 12 34 56 78
               </div>
             </div>
-            
+
             <div class="contact-method">
               <span class="contact-icon">📍</span>
               <div>
-                <strong>Adresse</strong><br>
+                <strong>Adresse</strong><br />
                 123 Rue Créative, 75000 Paris
               </div>
             </div>
-            
+
             <div class="contact-method">
               <span class="contact-icon">⏰</span>
               <div>
-                <strong>Horaires</strong><br>
+                <strong>Horaires</strong><br />
                 Lundi-Vendredi: 9h-18h
               </div>
             </div>
           </div>
-          
+
           <div class="contact-form">
             <h3>Envoyez-nous un message</h3>
             <form id="contactForm">
               <div class="form-group">
                 <label for="name">Nom complet*</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" required />
               </div>
-              
+
               <div class="form-group">
                 <label for="email">Email*</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" required />
               </div>
-              
+
               <div class="form-group">
                 <label for="phone">Téléphone</label>
-                <input type="tel" id="phone" name="phone">
+                <input type="tel" id="phone" name="phone" />
               </div>
-              
+
               <div class="form-group">
                 <label for="service">Service intéressé</label>
                 <select id="service" name="service">
                   <option value="">-- Sélectionnez --</option>
                   <option value="design">Design Graphique</option>
-                  <option value="web">Web Design</option>
-                  <option value="social">Réseaux Sociaux</option>
-                  <option value="autre">Autre</option>
-                </select>
-              </div>
-              
-              <div class="form-group">
-                <label for="message">Message*</label>
-                <textarea id="message" name="message" required></textarea>
-              </div>
-              
-              <button type="submit" class="submit-btn">Envoyer le message</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <script>
-    // Gestion du formulaire
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Simulation d'envoi
-      setTimeout(() => {
-        alert('Message envoyé avec succès ! Nous vous contacterons rapidement.');
-        this.reset();
-      }, 500);
-    });
-
-    // Animation pour les liens de navigation
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        
-        window.scrollTo({
-          top: targetElement.offsetTop - 70,
-          behavior: 'smooth'
-        });
-      });
-    });
-  </script>
-</body>
-</html>
+                  <option value="

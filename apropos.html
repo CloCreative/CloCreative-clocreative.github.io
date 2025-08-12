@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CloCréative Design - À propos</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <title>À propos de CloCréative Design - Agence de design graphique</title>
+  <meta name="description" content="CloCréative Design est une agence spécialisée dans la création visuelle, l'identité de marque et la communication digitale. Découvrez notre vision et nos valeurs." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --primary: #ff70f1;
+      --primary: #FF70F1;
       --dark: #000;
       --light: #fff;
       --gray: #f5f5f5;
     }
 
-    body {
+    html, body {
       margin: 0;
-      font-family: "Poppins", sans-serif;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
       background: var(--light);
       color: var(--dark);
       line-height: 1.6;
@@ -28,23 +28,37 @@
       background: var(--dark);
       display: flex;
       align-items: center;
-      padding: 15px 5%;
+      justify-content: space-between;
+      padding: 10px 5%;
       position: fixed;
       top: 0;
-      width: 100%;
+      width: 100vw;
       z-index: 1000;
       box-sizing: border-box;
+      gap: 20px;
+    }
+
+    nav h2 {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      height: 75px;
     }
 
     nav h2 a {
-      color: var(--primary);
-      text-decoration: none;
-      font-size: 1.8rem;
-      margin-right: auto;
+      display: block;
+    }
+
+    nav h2 img {
+      max-height: 85px;
+      margin: auto 0;
+      display: block;
     }
 
     .nav-links {
-      margin: 0 auto;
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
     }
 
     nav ul {
@@ -53,6 +67,11 @@
       margin: 0;
       padding: 0;
       gap: 30px;
+      align-items: center;
+    }
+
+    nav ul li {
+      position: relative;
     }
 
     nav ul li a {
@@ -61,8 +80,7 @@
       font-weight: 500;
       font-size: 1.1rem;
       transition: color 0.3s;
-      padding: 5px 0;
-      position: relative;
+      white-space: nowrap;
     }
 
     nav ul li a:hover,
@@ -70,17 +88,68 @@
       color: var(--primary);
     }
 
-    nav ul li a.active::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--primary);
+    /* Dropdown */
+    nav ul li.dropdown {
+      position: relative;
     }
 
-    /* Bannière avec image de fond en .png */
+    nav ul li .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--dark);
+      padding: 10px 0;
+      border-radius: 0 0 10px 10px;
+      display: none;
+      min-width: 200px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+
+    nav ul li:hover .dropdown-menu {
+      display: block;
+    }
+
+    nav ul li .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: var(--light);
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    nav ul li .dropdown-menu li a:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar input[type="search"] {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+      width: 180px;
+      transition: width 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .search-bar input[type="search"]:focus {
+      width: 220px;
+      box-shadow: 0 0 6px var(--primary);
+    }
+
+    body {
+      padding-top: 95px; /* Pour compenser la nav fixe */
+    }
+
+    /* Bannière */
     .about-header {
       height: 60vh;
       display: flex;
@@ -88,23 +157,14 @@
       justify-content: center;
       text-align: center;
       padding: 0 20px;
-      margin-top: 60px;
-      background: linear-gradient(
-          rgba(0, 0, 0, 0.6),
-          rgba(0, 0, 0, 0.6)
-        ),
-        url("assets/photos/apropos-banniere.png") center/cover no-repeat;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)),
+                  url('assets/photos/apropos-banniere.png') center/cover no-repeat;
       color: white;
     }
 
     .about-header h1 {
       font-size: 3.5rem;
-      margin-bottom: 15px;
-    }
-
-    .about-header p {
-      font-size: 1.2rem;
-      margin: 0;
+      margin-bottom: 20px;
     }
 
     .about-content {
@@ -123,115 +183,148 @@
       margin-bottom: 20px;
     }
 
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-
-    .team-member {
-      text-align: center;
-    }
-
-    .team-member img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
+    /* FAQ */
+    .faq-item {
       margin-bottom: 15px;
-      border: 3px solid var(--primary);
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
     }
 
-    .btn {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 10px 20px;
-      background-color: var(--primary);
+    .faq-question {
+      width: 100%;
+      background: var(--primary);
       color: white;
-      text-decoration: none;
-      font-weight: 600;
-      border-radius: 5px;
-      transition: background-color 0.3s;
+      text-align: left;
+      padding: 15px;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      outline: none;
     }
 
-    .btn:hover {
-      background-color: #e85cd6;
+    .faq-answer {
+      display: none;
+      background: var(--gray);
+      padding: 15px;
+    }
+
+    .faq-answer p {
+      margin: 0;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
     }
   </style>
 </head>
 <body>
   <!-- Navigation -->
   <nav>
-    <h2><a href="index.html">CloCréative</a></h2>
+    <h2>
+      <a href="index.html" aria-label="Accueil CloCréative">
+        <img src="assets/photos/logo.png" alt="Logo CloCréative" />
+      </a>
+    </h2>
+
     <div class="nav-links">
       <ul>
         <li><a href="index.html">Accueil</a></li>
         <li><a href="apropos.html" class="active">À propos</a></li>
-        <li><a href="index.html#services">Services</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
+        <li class="dropdown">
+          <a href="#" aria-haspopup="true" aria-expanded="false">Services ▾</a>
+          <ul class="dropdown-menu" aria-label="Sous-menu Services">
+            <li><a href="design-graphique.html">Design graphique</a></li>
+            <li><a href="mailing.html">Mailing</a></li>
+            <li><a href="montage-video.html">Montage vidéo</a></li>
+            <li><a href="newsletter.html">Newsletter</a></li>
+            <li><a href="reseaux-sociaux.html">Réseaux sociaux</a></li>
+            <li><a href="web-design.html">Web Design</a></li>
+          </ul>
+        </li>
+        <li><a href="boutique.html">Boutique</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
+    </div>
+
+    <div class="search-bar">
+      <input type="search" placeholder="Rechercher..." aria-label="Recherche" />
     </div>
   </nav>
 
-  <!-- En-tête À propos avec image de fond PNG -->
+  <!-- En-tête -->
   <div class="about-header">
     <div>
-      <h1>Notre histoire</h1>
-      <p>Découvrez l'équipe derrière CloCréative</p>
+      <h1>À propos</h1>
+      <p>Découvrez l'histoire, la mission et les valeurs de CloCréative Design</p>
     </div>
   </div>
 
-  <!-- Contenu principal -->
+  <!-- Contenu -->
   <div class="about-content">
     <section class="about-section">
       <h2>Qui sommes-nous ?</h2>
-      <p>
-        CloCréative est une agence de design et communication fondée en 2020.
-        Notre mission est d'aider les entreprises à développer leur identité
-        visuelle à travers des créations uniques et mémorables.
-      </p>
+      <p><strong>CloCréative Design</strong> est une agence de <strong>design graphique</strong> et de <strong>communication digitale</strong> fondée en 2020. Nous accompagnons les entreprises, entrepreneurs et créateurs dans la création d’une <strong>identité visuelle forte</strong> et cohérente. Notre mission : transformer vos idées en visuels uniques qui marquent les esprits et valorisent votre marque.</p>
     </section>
 
     <section class="about-section">
-      <h2>Notre équipe</h2>
-      <div class="team-grid">
-        <div class="team-member">
-          <img
-            src="https://randomuser.me/api/portraits/women/44.jpg"
-            alt="Cloé"
-          />
-          <h3>Cloé</h3>
-          <p>Directrice artistique</p>
+      <h2>Nos services</h2>
+      <p>De la conception d’un <strong>logo</strong> à la création de supports <strong>print</strong> et <strong>digitaux</strong>, nous proposons un accompagnement sur-mesure :</p>
+      <ul>
+        <li>Identité visuelle et charte graphique</li>
+        <li>Création de logos sur-mesure</li>
+        <li>Supports imprimés : cartes de visite, flyers, affiches</li>
+        <li>Visuels pour réseaux sociaux</li>
+        <li>Création et gestion de sites web</li>
+      </ul>
+      <p>➡ Découvrez tous nos services sur la <a href="index.html#services">page dédiée</a>.</p>
+    </section>
+
+    <section class="about-section">
+      <h2>Pourquoi choisir CloCréative Design ?</h2>
+      <ul>
+        <li><strong>Expertise :</strong> plus de 5 ans d'expérience dans le design et la communication</li>
+        <li><strong>Créativité :</strong> chaque projet est unique et conçu sur-mesure</li>
+        <li><strong>Disponibilité :</strong> un interlocuteur unique pour un suivi personnalisé</li>
+        <li><strong>Qualité :</strong> un haut niveau d’exigence dans chaque création</li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section class="about-section faq">
+      <h2>FAQ - Questions fréquentes</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">1. Quels types de projets réalisez-vous ?</button>
+        <div class="faq-answer">
+          <p>Nous travaillons sur tous types de projets visuels : logos, chartes graphiques, print, web design et communication digitale.</p>
         </div>
-        <div class="team-member">
-          <img
-            src="https://randomuser.me/api/portraits/men/32.jpg"
-            alt="Marc"
-          />
-          <h3>Marc</h3>
-          <p>Designer senior</p>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">2. Travaillez-vous avec des petites entreprises ?</button>
+        <div class="faq-answer">
+          <p>Oui, nous accompagnons aussi bien des TPE/PME que des indépendants et startups.</p>
         </div>
-        <div class="team-member">
-          <img
-            src="https://randomuser.me/api/portraits/women/68.jpg"
-            alt="Sophie"
-          />
-          <h3>Sophie</h3>
-          <p>Responsable marketing</p>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">3. Proposez-vous des formules clé-en-main ?</button>
+        <div class="faq-answer">
+          <p>Oui, nous proposons des packs complets incluant création visuelle, site web et gestion des réseaux sociaux.</p>
         </div>
       </div>
     </section>
-
-    <section class="about-section">
-      <h2>Nos valeurs</h2>
-      <ul>
-        <li><strong>Créativité :</strong> Nous repoussons les limites du design conventionnel</li>
-        <li><strong>Qualité :</strong> Excellence dans chaque détail</li>
-        <li><strong>Collaboration :</strong> Partenariats transparents avec nos clients</li>
-      </ul>
-      <a href="index.html" class="btn">Retour à l'accueil</a>
-    </section>
   </div>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.parentElement;
+        item.classList.toggle('active');
+      });
+    });
+  </script>
 </body>
 </html>
