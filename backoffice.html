@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CloCréative Design - Accueil</title>
+
+<!-- Poppins Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+<!-- Quill Editor -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<style>
+  :root {
+    --primary: #FF70F1;
+    --dark: #000;
+    --light: #fff;
+    --gray: #f5f5f5;
+  }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  nav {
+    background: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 5%;
+    position: fixed;
+    top: 0; width: 100vw;
+    z-index: 1000;
+    box-sizing: border-box;
+    gap: 20px;
+  }
+  nav h2 {
+    margin: 0;
+    height: 75px;
+    display: flex;
+    align-items: center;
+  }
+  nav h2 img {
+    max-height: 85px;
+    display: block;
+  }
+  .nav-links ul {
+    list-style: none;
+    display: flex;
+    margin: 0; padding: 0;
+    gap: 30px;
+    align-items: center;
+  }
+  nav ul li a {
+    color: var(--light);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    white-space: nowrap;
+  }
+  nav ul li a:hover,
+  nav ul li a.active {
+    color: var(--primary);
+  }
+  body {
+    padding-top: 95px;
+  }
+  section {
+    padding: 40px 5%;
+    max-width: 1200px;
+    margin: auto;
+  }
+  h2 {
+    color: var(--primary);
+  }
+  .btn {
+    background: var(--primary);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+  }
+  /* Back Office styles */
+  #toggle-backoffice-btn {
+    position: fixed;
+    bottom: 15px; right: 15px;
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 50px;
+    padding: 10px 15px;
+    z-index: 1100;
+  }
+  #backoffice {
+    display: none;
+    position: fixed;
+    top: 60px; right: 15px;
+    width: 450px;
+    max-height: 80vh;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    overflow-y: auto;
+    z-index: 1100;
+    padding: 15px 20px;
+    font-size: 14px;
+  }
+  #backoffice h2 {
+    margin-top: 0;
+  }
+  /* Tabs */
+  #backoffice .tabs {
+    display: flex;
+    border-bottom: 2px solid var(--primary);
+    margin-bottom: 10px;
+  }
+  #backoffice .tabs button {
+    flex: 1;
+    padding: 10px 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--dark);
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.3s;
+  }
+  #backoffice .tabs button.active {
+    border-bottom-color: var(--primary);
+    color: var(--primary);
+  }
+  /* Editor containers */
+  .editor-container {
+    margin-bottom: 20px;
+  }
+  /* Blog & Boutique lists */
+  .item-list {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  .item-list div {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--gray);
+    cursor: pointer;
+  }
+  .item-list div:hover {
+    background: var(--gray);
+  }
+  .item-list div.selected {
+    background: var(--primary);
+    color: white;
+  }
+  label {
+    font-weight: 600;
+    margin-top: 10px;
+    display: block;
+  }
+  input[type="text"], input[type="number"], input[type="date"], input[type="url"], textarea {
+    width: 100%;
+    padding: 6px 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-family: 'Poppins', sans-serif;
+  }
+  textarea {
+    min-height: 80px;
+  }
+  button.action-btn {
+    background: var(--primary);
+    border: none;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  button.action-btn.danger {
+    background: #d9534f;
+  }
+  /* Quill editor */
+  .ql-container {
+    height: 150px;
+  }
+  /* Affichage dynamique */
+  #blog-articles, #boutique-products {
+    margin-top: 20px;
+  }
+  .article, .product {
+    border: 1px solid var(--gray);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: white;
+    text-align: left;
+  }
+  .article h3, .product h3 {
+    margin-top: 0;
+    color: var(--primary);
+  }
+  .product img, .article img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+  .product-price {
+    font-weight: 700;
+    margin-top: 8px;
+    color: var(--dark);
+  }
+</style>
+
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <h2>
+    <a href="index.html" aria-label="Accueil CloCréative">
+      <img src="assets/photos/logo.png" alt="Logo CloCréative" />
+    </a>
+  </h2>
+  <div class="nav-links">
+    <ul>
+      <li><a href="index.html" class="active" aria-current="page">Accueil</a></li>
+      <li><a href="apropos.html">À propos</a></li>
+      <li class="dropdown">
+        <a href="#" aria-haspopup="true" aria-expanded="false">Services ▾</a>
+        <ul class="dropdown-menu" aria-label="Sous-menu Services">
+          <li><a href="design-graphique.html">Design graphique</a></li>
+          <li><a href="mailing.html">Mailing</a></li>
+          <li><a href="montage-video.html">Montage vidéo</a></li>
+          <li><a href="newsletter.html">Newsletter</a></li>
+          <li><a href="reseaux-sociaux.html">Réseaux sociaux</a></li>
+          <li><a href="web-design.html">Web Design</a></li>
+        </ul>
+      </li>
+      <li><a href="boutique.html">Boutique</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Contenu dynamique affiché -->
+
+<section id="accueil-texts">
+  <!-- Accueil text content will be injected here -->
+</section>
+
+<section id="blog-articles">
+  <h2>Articles du Blog</h2>
+  <!-- Blog articles will be injected here -->
+</section>
+
+<section id="boutique-products">
+  <h2>Produits Boutique</h2>
+  <!-- Boutique products injected here -->
+</section>
+
+<section id="about-texts" style="display:none;">
+  <!-- Texte page À propos -->
+</section>
+
+<section id="contact-texts" style="display:none;">
+  <!-- Texte page Contact -->
+</section>
+
+<!-- Back Office toggle button -->
+<button id="toggle-backoffice-btn" aria-pressed="false" aria-label="Afficher ou cacher le back office">Back Office</button>
+
+<!-- Back Office -->
+<section id="backoffice" aria-live="polite" aria-label="Interface d'administration">
+  <h2>Back Office - Gérer Blog, Boutique & Pages</h2>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="blog">Blog</button>
+    <button class="tab-btn" data-tab="boutique">Boutique</button>
+    <button class="tab-btn" data-tab="pages">Pages</button>
+  </div>
+
+  <div id="tab-blog" class="tab-content">
+    <label>Articles existants (cliquez pour modifier):</label>
+    <div id="blog-list" class="item-list" role="listbox" tabindex="0" aria-label="Liste des articles du blog"></div>
+
+    <label for="blog-title">Titre de l'article</label>
+    <input type="text" id="blog-title" placeholder="Titre..." />
+
+    <label for="blog-date">Date</label>
+    <input type="date" id="blog-date" />
+
+    <label>Contenu</label>
+    <div id="blog-editor" style="height: 200px;"></div>
+
+    <label for="blog-image">URL image (optionnel)</label>
+    <input type="url" id="blog-image" placeholder="https://exemple.com/image.jpg" />
+
+    <button id="save-blog-btn" class="action-btn">Enregistrer l'article</button>
+    <button id="delete-blog-btn" class="action-btn danger" style="display:none;">Supprimer l'article</button>
+  </div>
+
+  <div id="tab-boutique" class="tab-content" style="display:none;">
+    <label>Produits existants (cliquez pour modifier):</label>
+    <div id="product-list" class="item-list" role="listbox" tabindex="0" aria-label="Liste des produits boutique"></div>
+
+    <label for="product-name">Nom du produit</label>
+    <input type="text" id="product-name" placeholder="Nom du produit" />
+
+    <label for="product-price">Prix (€)</label>
+    <input type="number" id="product-price" step="0.01" min="0" placeholder="Prix" />
+
+    <label for="product-description">Description</label>
+    <textarea id="product-description" rows="3" placeholder="Description du produit"></textarea>
+
+    <label for="product-image">URL image (optionnel)</label>
+    <input type="url" id="product-image" placeholder="https://exemple.com/image.jpg" />
+
+    <button id="save-product-btn" class="action-btn">Enregistrer le produit</button>
+    <button id="delete-product-btn" class="action-btn danger" style="display:none;">Supprimer le produit</button>
+  </div>
+
+  <div id="tab-pages" class="tab-content" style="display:none;">
+    <label for="page-select">Choisir la page à modifier :</label>
+    <select id="page-select" aria-label="Sélection de la page">
+      <option value="accueil">Accueil</option>
+      <option value="apropos">À propos</option>
+      <option value="contact">Contact</option>
+    </select>
+
+    <label>Contenu de la page</label>
+    <div id="page-editor" style="height: 250px;"></div>
+
+    <button id="save-page-btn" class="action-btn">Enregistrer la page</button>
+  </div>
+</section>
+
+<!-- Quill JS -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<script>
+  // === Variables globales ===
+  const toggleBtn = document.getElementById('toggle-backoffice-btn');
+  const backoffice = document.getElementById('backoffice');
+
+  const tabs = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  // Blog elements
+  const blogList = document.getElementById('blog-list');
+  const blogTitleInput = document.getElementById('blog-title');
+  const blogDateInput = document.getElementById('blog-date');
+  const blogImageInput = document.getElementById('blog-image');
+  const saveBlogBtn = document.getElementById('save-blog-btn');
+  const deleteBlogBtn = document.getElementById('delete-blog-btn');
+
+  // Boutique elements
+  const productList = document.getElementById('product-list');
+  const productNameInput = document.getElementById('product-name');
+  const productPriceInput = document.getElementById('product-price');
+  const productDescriptionInput = document.getElementById('product-description');
+  const productImageInput = document.getElementById('product-image');
+  const saveProductBtn = document.getElementById('save-product-btn');
+  const deleteProductBtn = document.getElementById('delete-product-btn');
+
+  // Pages elements
+  const pageSelect = document.getElementById('page-select');
+  const savePageBtn = document.getElementById('save-page-btn');
+
+  // Display sections for pages
+  const accueilSection = document.getElementById('accueil-texts');
+  const aboutSection = document.getElementById('about-texts');
+  const contactSection = document.getElementById('contact-texts');
+
+  // Quill editors
+  let blogEditor, pageEditor;
+
+  // Données stockées
+  let blogArticles = [];
+  let boutiqueProducts = [];
+  let pagesContent = {};
+
+  // Article/product sélectionné
+  let selectedBlogIndex = null;
+  let selectedProductIndex = null;
+
+  // Initialisation Quill éditeurs
+  function initEditors() {
+    blogEditor = new Quill('#blog-editor', {
+      theme: 'snow',
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],
+          ['link', 'image'],
+          [{ list: 'ordered'}, { list: 'bullet' }],
+          [{ header: [1, 2, 3, false] }],
+          ['clean']
+        ]
+      }
+    });
+    pageEditor = new Quill('#page-editor', {
+      theme: 'snow',
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],
+          ['link', 'image'],
+          [{ list: 'ordered'}, { list: 'bullet' }],
+          [{ header: [1, 2, 3, false] }],
+          ['clean']
+        ]
+      }
+    });
+  }
+
+  // Sauvegarde dans localStorage
+  function saveToStorage() {
+    localStorage.setItem('blogArticles', JSON.stringify(blogArticles));
+    localStorage.setItem('boutiqueProducts', JSON.stringify(boutiqueProducts));
+    localStorage.setItem('pagesContent', JSON.stringify(pagesContent));
+  }
+
+  // Chargement depuis localStorage
+  function loadFromStorage() {
+    const blogData = localStorage.getItem('blogArticles');
+    const productData = localStorage.getItem('boutiqueProducts');
+    const pagesData = localStorage.getItem('pagesContent');
+
+    blogArticles = blogData ? JSON.parse(blogData) : [];
+    boutiqueProducts = productData ? JSON.parse(productData) : [];
+    pagesContent = pagesData ? JSON.parse(pagesData) : {
+      accueil: '<h2>Bienvenue sur CloCréative Design</h2><p>Solutions créatives pour votre communication digitale.</p>',
+      apropos: '<h2>À propos de nous</h2><p>CloCréative Design accompagne votre communication digitale avec créativité et stratégie.</p>',
+      contact: '<h2>Contactez-nous</h2><p>Prêt à donner vie à votre projet ? Parlons-en !</p>'
+    };
+  }
+
+  // Afficher listes blog & boutique
+  function renderBlogList() {
+    blogList.innerHTML = '';
+    blogArticles.forEach((article, i) => {
+      const div = document.createElement('div');
+      div.textContent = article.title || '(Sans titre)';
+      div.setAttribute('role', 'option');
+      div.tabIndex = 0;
+      if(i === selectedBlogIndex) div.classList.add('selected');
+      div.onclick = () => selectBlog(i);
+      div.onkeydown = (e) => { if(e.key === 'Enter') selectBlog(i); };
+      blogList.appendChild(div);
+    });
+  }
+  function renderProductList() {
+    productList.innerHTML = '';
+    boutiqueProducts.forEach((prod, i) => {
+      const div = document.createElement('div');
+      div.textContent = prod.name || '(Sans nom)';
+      div.setAttribute('role', 'option');
+      div.tabIndex = 0;
+      if(i === selectedProductIndex) div.classList.add('selected');
+      div.onclick = () => selectProduct(i);
+      div.onkeydown = (e) => { if(e.key === 'Enter') selectProduct(i); };
+      productList.appendChild(div);
+    });
+  }
+
+  // Sélection blog
+  function selectBlog(index) {
+    selectedBlogIndex = index;
+    const article = blogArticles[index];
+    blogTitleInput.value = article.title || '';
+    blogDateInput.value = article.date || '';
+    blogEditor.root.innerHTML = article.content || '';
+    blogImageInput.value = article.image || '';
+    deleteBlogBtn.style.display = 'inline-block';
+    renderBlogList();
+  }
+  // Sélection produit
+  function selectProduct(index) {
+    selectedProductIndex = index;
+    const prod = boutiqueProducts[index];
+    productNameInput.value = prod.name || '';
+    productPriceInput.value = prod.price || '';
+    productDescriptionInput.value = prod.description || '';
+    productImageInput.value = prod.image || '';
+    deleteProductBtn.style.display = 'inline-block';
+    renderProductList();
+  }
+
+  // Réinitialiser blog
+  function resetBlogForm() {
+    selectedBlogIndex = null;
+    blogTitleInput.value = '';
+    blogDateInput.value = '';
+    blogEditor.root.innerHTML = '';
+    blogImageInput.value = '';
+    deleteBlogBtn.style.display = 'none';
+    renderBlogList();
+  }
+  // Réinitialiser produit
+  function resetProductForm() {
+    selectedProductIndex = null;
+    productNameInput.value = '';
+    productPriceInput.value = '';
+    productDescriptionInput.value = '';
+    productImageInput.value = '';
+    deleteProductBtn.style.display = 'none';
+    renderProductList();
+  }
+
+  // Enregistrer article blog
+  saveBlogBtn.onclick = () => {
+    const title = blogTitleInput.value.trim();
+    if(!title) return alert('Le titre est obligatoire.');
+    const date = blogDateInput.value;
+    const content = blogEditor.root.innerHTML.trim();
+    const image = blogImageInput.value.trim();
+
+    const articleData = { title, date, content, image };
+    if(selectedBlogIndex !== null) {
+      blogArticles[selectedBlogIndex] = articleData;
+    } else {
+      blogArticles.push(articleData);
+    }
+    saveToStorage();
+    resetBlogForm();
+    renderBlogList();
+    renderBlogArticlesOnPage();
+  };
+  // Supprimer article blog
+  deleteBlogBtn.onclick = () => {
+    if(selectedBlogIndex === null) return;
+    if(confirm('Supprimer cet article ?')) {
+      blogArticles.splice(selectedBlogIndex, 1);
+      saveToStorage();
+      resetBlogForm();
+      renderBlogList();
+      renderBlogArticlesOnPage();
+    }
+  };
+
+  // Enregistrer produit boutique
+  saveProductBtn.onclick = () => {
+    const name = productNameInput.value.trim();
+    if(!name) return alert('Le nom du produit est obligatoire.');
+    const price = parseFloat(productPriceInput.value);
+    if(isNaN(price)) return alert('Le prix doit être un nombre.');
+    const description = productDescriptionInput.value.trim();
+    const image = productImageInput.value.trim();
+
+    const prodData = { name, price, description, image };
+    if(selectedProductIndex !== null) {
+      boutiqueProducts[selectedProductIndex] = prodData;
+    } else {
+      boutiqueProducts.push(prodData);
+    }
+    saveToStorage();
+    resetProductForm();
+    renderProductList();
+    renderBoutiqueOnPage();
+  };
+  // Supprimer produit boutique
+  deleteProductBtn.onclick = () => {
+    if(selectedProductIndex === null) return;
+    if(confirm('Supprimer ce produit ?')) {
+      boutiqueProducts.splice(selectedProductIndex, 1);
+      saveToStorage();
+      resetProductForm();
+      renderProductList();
+      renderBoutiqueOnPage();
+    }
+  };
+
+  // Charger page sélectionnée
+  function loadPageContent(pageKey) {
+    pageEditor.root.innerHTML = pagesContent[pageKey] || '';
+  }
+  // Enregistrer contenu page
+  savePageBtn.onclick = () => {
+    const pageKey = pageSelect.value;
+    const content = pageEditor.root.innerHTML.trim();
+    pagesContent[pageKey] = content;
+    saveToStorage();
+    renderPagesOnSite();
+    alert('Page enregistrée !');
+  };
+
+  // Gérer onglets back office
+  tabs.forEach(tab => {
+    tab.onclick = () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      tabContents.forEach(tc => tc.style.display = 'none');
+      document.getElementById('tab-' + tab.dataset.tab).style.display = 'block';
+    };
+  });
+
+  // Toggle backoffice display
+  toggleBtn.onclick = () => {
+    if(backoffice.style.display === 'block') {
+      backoffice.style.display = 'none';
+      toggleBtn.setAttribute('aria-pressed', 'false');
+    } else {
+      backoffice.style.display = 'block';
+      toggleBtn.setAttribute('aria-pressed', 'true');
+    }
+  };
+
+  // Rendu dynamique page - Blog articles
+  function renderBlogArticlesOnPage() {
+    const container = document.getElementById('blog-articles');
+    if(blogArticles.length === 0) {
+      container.innerHTML = '<h2>Articles du Blog</h2><p>Aucun article pour le moment.</p>';
+      return;
+    }
+    let html = '<h2>Articles du Blog</h2>';
+    blogArticles.forEach(article => {
+      html += `<article class="article">
+        <h3>${article.title}</h3>
+        <small>${article.date ? new Date(article.date).toLocaleDateString() : ''}</small>
+        <div>${article.content}</div>`;
+      if(article.image) html += `<img src="${article.image}" alt="Image article ${article.title}" />`;
+      html += '</article>';
+    });
+    container.innerHTML = html;
+  }
+
+  // Rendu dynamique page - Boutique
+  function renderBoutiqueOnPage() {
+    const container = document.getElementById('boutique-products');
+    if(boutiqueProducts.length === 0) {
+      container.innerHTML = '<h2>Produits Boutique</h2><p>Aucun produit pour le moment.</p>';
+      return;
+    }
+    let html = '<h2>Produits Boutique</h2>';
+    boutiqueProducts.forEach(prod => {
+      html += `<div class="product">
+        <h3>${prod.name}</h3>
+        <p>${prod.description}</p>
+        ${prod.image ? `<img src="${prod.image}" alt="Image produit ${prod.name}">` : ''}
+        <p class="product-price">${prod.price.toFixed(2)} €</p>
+      </div>`;
+    });
+    container.innerHTML = html;
+  }
+
+  // Rendu dynamique page - Pages textes
+  function renderPagesOnSite() {
+    accueilSection.innerHTML = pagesContent.accueil || '';
+    aboutSection.innerHTML = pagesContent.apropos || '';
+    contactSection.innerHTML = pagesContent.contact || '';
+  }
+
+  // Changement page sélectionnée (pages)
+  pageSelect.onchange = () => {
+    loadPageContent(pageSelect.value);
+  };
+
+  // Initialisation complète
+  function init() {
+    initEditors();
+    loadFromStorage();
+    renderBlogList();
+    renderProductList();
+    renderBlogArticlesOnPage();
+    renderBoutiqueOnPage();
+    renderPagesOnSite();
+    loadPageContent(pageSelect.value);
+  }
+
+  init();
+
+</script>
+
+</body>
+</html>

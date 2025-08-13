@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog – CloCréative Design</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #FF70F1;      /* rose vif */
+      --blue: #015AF1;
+      --sun: #FFCC02;
+      --dark: #000000;
+      --light: #FFFFFF;
+      --gray: #f5f5f5;
+      --violet-btn: #9C27B0;   /* violet lumineux pour boutons */
+      --violet-hover: #7B1FA2;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    nav {
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 5%;
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      z-index: 1000;
+      box-sizing: border-box;
+      gap: 20px;
+    }
+
+    nav h2 {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      height: 75px;
+    }
+
+    nav h2 img {
+      max-height: 85px;
+      margin: auto 0;
+      display: block;
+    }
+
+    .nav-links {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: var(--primary);
+    }
+
+    nav ul li.dropdown {
+      position: relative;
+    }
+
+    nav ul li .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--dark);
+      padding: 10px 0;
+      border-radius: 0 0 10px 10px;
+      display: none;
+      min-width: 200px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+
+    nav ul li:hover .dropdown-menu,
+    nav ul li:focus-within .dropdown-menu {
+      display: block;
+    }
+
+    nav ul li .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: var(--light);
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    nav ul li .dropdown-menu li a:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar input[type="search"] {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+      width: 180px;
+      transition: width 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .search-bar input[type="search"]:focus {
+      width: 220px;
+      box-shadow: 0 0 6px var(--primary);
+    }
+
+    body {
+      padding-top: 95px;
+    }
+
+    .blog-header {
+      height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      background: linear-gradient(
+          rgba(0, 0, 0, 0.6),
+          rgba(0, 0, 0, 0.6)
+        ),
+        url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1470&q=80") center/cover no-repeat;
+      color: white;
+      margin-bottom: 40px;
+    }
+
+    .blog-header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .blog-header p {
+      font-size: 1.4rem;
+      font-weight: 400;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    main.container {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    article.blog-post {
+      background: var(--light);
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(1,90,241,0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    article.blog-post:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(1,90,241,0.3);
+      border-color: var(--primary);
+    }
+
+    article.blog-post img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 3px solid var(--primary);
+    }
+
+    .content {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .content h2 {
+      font-weight: 600;
+      font-size: 1.6rem;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .content p {
+      flex-grow: 1;
+      font-weight: 300;
+      color: #333333;
+      margin-bottom: 20px;
+    }
+
+    .btn-read {
+      align-self: flex-start;
+      background: var(--violet-btn);
+      color: var(--light);
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .btn-read:hover {
+      background: var(--violet-hover);
+      color: var(--light);
+    }
+
+    footer {
+      background: var(--gray);
+      text-align: center;
+      padding: 20px;
+      color: #444;
+      font-size: 0.9rem;
+    }
+
+    a {
+      color: var(--primary);
+    }
+
+    @media (max-width: 600px) {
+      .blog-header h1 {
+        font-size: 2.6rem;
+      }
+
+      main.container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h2>
+      <a href="index.html" aria-label="Accueil CloCréative">
+        <img src="assets/photos/logo.png" alt="Logo CloCréative" />
+      </a>
+    </h2>
+
+    <div class="nav-links">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+        <li class="dropdown">
+          <a href="#" aria-haspopup="true" aria-expanded="false">Services ▾</a>
+          <ul class="dropdown-menu" aria-label="Sous-menu Services">
+            <li><a href="design-graphique.html">Design graphique</a></li>
+            <li><a href="mailing.html">Mailing</a></li>
+            <li><a href="montage-video.html">Montage vidéo</a></li>
+            <li><a href="newsletter.html">Newsletter</a></li>
+            <li><a href="reseaux-sociaux.html">Réseaux sociaux</a></li>
+            <li><a href="web-design.html">Web Design</a></li>
+          </ul>
+        </li>
+        <li><a href="boutique.html">Boutique</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="search-bar">
+      <input type="search" placeholder="Rechercher..." aria-label="Recherche" />
+    </div>
+  </nav>
+
+  <header class="blog-header" role="banner">
+    <div>
+      <h1>Le Blog CloCréative</h1>
+      <p>Inspiration, conseils & tendances design graphique et digital</p>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <article class="blog-post">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Design graphique moderne" />
+      <div class="content">
+        <h2>5 astuces pour un design graphique réussi</h2>
+        <p>Découvrez comment harmoniser les couleurs, choisir les bonnes typographies et optimiser la lisibilité pour un rendu professionnel et moderne.</p>
+        <a href="#" class="btn-read">Lire la suite</a>
+      </div>
+    </article>
+
+    <article class="blog-post">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Création de site web" />
+      <div class="content">
+        <h2>Créer un site web responsive en 2025</h2>
+        <p>Les tendances à suivre et les erreurs à éviter pour concevoir un site performant, adapté à tous les écrans et facile à maintenir.</p>
+        <a href="#" class="btn-read">Lire la suite</a>
+      </div>
+    </article>
+
+    <article class="blog-post">
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Marketing digital" />
+      <div class="content">
+        <h2>Les clés d’une stratégie marketing digitale efficace</h2>
+        <p>Comment capter l’attention de votre audience avec des contenus pertinents et une présence cohérente sur les réseaux sociaux.</p>
+        <a href="#" class="btn-read">Lire la suite</a>
+      </div>
+    </article>
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2025 CloCréative Design. Tous droits réservés.</p>
+  </footer>
+</body>
+</html>

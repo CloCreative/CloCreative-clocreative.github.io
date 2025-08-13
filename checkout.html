@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Paiement - CloCréative</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #fff;
+      color: #333;
+    }
+    h1 {
+      color: #FF70F1;
+      text-align: center;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 30px;
+      background: #FF70F1;
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+      padding: 12px;
+      cursor: pointer;
+      border-radius: 8px;
+      width: 100%;
+    }
+    button:hover {
+      background: #d050c0;
+    }
+    .total {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-top: 20px;
+      text-align: right;
+      color: #FF70F1;
+    }
+    .empty-cart {
+      text-align: center;
+      margin-top: 40px;
+      font-style: italic;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <h1>Finaliser votre commande</h1>
+
+  <div id="cart-contents">
+    <!-- Panier affiché ici -->
+  </div>
+
+  <form id="order-form">
+    <label for="name">Nom complet :</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="email">Email :</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="message">Message (optionnel) :</label>
+    <textarea id="message" name="message" rows="4" placeholder="Ex : Détails supplémentaires"></textarea>
+
+    <button type="submit">Envoyer la commande par email</button>
+  </form>
+
+  <script>
+    // Récupérer panier depuis localStorage
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    const cartContents = document.getElementById('cart-contents');
+    const orderForm = document.getElementById('order-form');
+
+    if (cart.length === 0) {
+      cartContents.innerHTML = '<p class="empty-cart">Votre panier est vide.</p>';
+      orderForm.style.display = 'none';
+    } else {
+      // Afficher le panier
+      let html = '<ul>';
+      let total = 0;
+      cart.forEach(item => {
+        const lineTotal = item.price * item.qty;
+        total += lineTotal;
+        html += `<li>${item.name} x${item.qty} - ${lineTotal} €</li>`;
+      });
+      html += '</ul>';
+      html += `<p class="total">Total : ${total} €</p>`;
+      cartContents.innerHTML = html;
+    }
+
+    // Gestion envoi mail
+    orderForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = orderForm.name.value.trim();
+      const email = orderForm.email.value.trim();
+      const message = orderForm.message.value.trim();
+
+      if (cart.length === 0) {
+        alert("Votre panier est vide !");
+        return;
+      }
+
+      // Construire corps du mail
+      let mailBody = `Bonjour,%0D%0A%0D%0AJe souhaite passer commande avec les produits suivants :%0D%0A`;
+      cart.forEach(item => {
+        mailBody += `- ${item.name} x${item.qty} : ${item.price * item.qty} €%0D%0A`;
+      });
+
+      let total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+      mailBody += `%0D%0ATotal de la commande : ${total} €%0D%0A%0D%0A`;
+      mailBody += `Nom : ${name}%0D%0AEmail : ${email}%0D%0A`;
+
+      if (message) {
+        mailBody += `Message : ${message}%0D%0A%0D%0A`;
+      }
+
+      mailBody += `Merci.%0D%0A`;
+
+      // Ouvrir mailto:
+      const mailToLink = `mailto:contact@clocreative.fr?subject=Commande%20CloCréative&body=${mailBody}`;
+
+      window.location.href = mailToLink;
+    });
+  </script>
+</body>
+</html>

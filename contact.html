@@ -23,7 +23,7 @@
       color: var(--light);
       line-height: 1.6;
       overflow-x: hidden;
-      /* padding-top supprimé ici */
+      padding-top: 95px; /* pour nav fixe */
     }
 
     h1, h2, h3 {
@@ -193,7 +193,6 @@
       background: rgba(0, 0, 0, 0.7);
       min-height: 100vh;
       padding-bottom: 60px;
-      padding-top: 95px; /* décalage sous le menu */
     }
 
     /* Section Contact du 2e code */
@@ -472,4 +471,54 @@
                 <select id="service" name="service">
                   <option value="">-- Sélectionnez --</option>
                   <option value="design">Design Graphique</option>
-                  <option value="
+                  <option value="web">Web Design</option>
+                  <option value="social">Réseaux Sociaux</option>
+                  <option value="autre">Autre</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Message*</label>
+                <textarea id="message" name="message" required></textarea>
+              </div>
+
+              <button type="submit" class="submit-btn">Envoyer le message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Gestion du formulaire
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Simulation d'envoi
+      setTimeout(() => {
+        alert('Message envoyé avec succès ! Nous vous contacterons rapidement.');
+        this.reset();
+      }, 500);
+    });
+
+    // Animation pour les liens de navigation (smooth scroll vers ancres)
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        // Seulement si href commence par #
+        if(this.getAttribute('href').startsWith('#')) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          if(targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 95, // nav fixe hauteur
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

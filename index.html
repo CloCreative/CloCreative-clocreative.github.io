@@ -6,6 +6,63 @@
   <title>CloCréative Design - Accueil</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <style>
+
+/* Back office */
+#backoffice {
+  display: none;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+#backoffice h2 {
+  color: var(--primary);
+  margin-top: 0;
+}
+
+#backoffice label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+#backoffice input, #backoffice textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid var(--gray);
+  font-family: 'Poppins', sans-serif;
+}
+
+#backoffice button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: var(--primary);
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#toggle-backoffice-btn {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  background: var(--primary);
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 50px;
+  z-index: 1100;
+}
+
     :root {
       --primary: #FF70F1;
       --dark: #000;
@@ -435,7 +492,6 @@
           </ul>
         </li>
         <li><a href="boutique.html">Boutique</a></li>
-        <li><a href="blog.html">Blog</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
@@ -516,5 +572,174 @@
       <a href="#" aria-label="Instagram">📸</a>
     </div>
   </footer>
+<button id="toggle-backoffice-btn" aria-pressed="false" aria-label="Afficher ou cacher le back office">Back Office</button>
+
+<section id="backoffice" aria-live="polite" aria-label="Interface d'administration">
+  <h2>Back Office - Gérer Blog & Boutique</h2>
+
+  <h3>Ajouter un article de blog</h3>
+  <label for="blog-title">Titre</label>
+  <input type="text" id="blog-title" placeholder="Titre de l'article" />
+
+  <label for="blog-date">Date</label>
+  <input type="date" id="blog-date" />
+
+  <label for="blog-content">Contenu</label>
+  <textarea id="blog-content" rows="4" placeholder="Contenu de l'article"></textarea>
+
+  <label for="blog-image">URL image (optionnel)</label>
+  <input type="url" id="blog-image" placeholder="https://exemple.com/image.jpg" />
+
+  <button id="add-blog-btn">Ajouter l'article</button>
+
+  <hr />
+
+  <h3>Ajouter un produit boutique</h3>
+  <label for="product-name">Nom du produit</label>
+  <input type="text" id="product-name" placeholder="Nom du produit" />
+
+  <label for="product-price">Prix (€)</label>
+  <input type="number" id="product-price" placeholder="Prix" step="0.01" min="0" />
+
+  <label for="product-description">Description</label>
+  <textarea id="product-description" rows="3" placeholder="Description du produit"></textarea>
+
+  <label for="product-image">URL image (optionnel)</label>
+  <input type="url" id="product-image" placeholder="https://exemple.com/image.jpg" />
+
+  <button id="add-product-btn">Ajouter le produit</button>
+</section>
+<script>
+  // Toggle affichage back office
+  const toggleBtn = document.getElementById('toggle-backoffice-btn');
+  const backoffice = document.getElementById('backoffice');
+
+  toggleBtn.addEventListener('click', () => {
+    if (backoffice.style.display === 'none' || backoffice.style.display === '') {
+      backoffice.style.display = 'block';
+      toggleBtn.setAttribute('aria-pressed', 'true');
+    } else {
+      backoffice.style.display = 'none';
+      toggleBtn.setAttribute('aria-pressed', 'false');
+    }
+  });
+
+  // Initialiser stockage local
+  let blogArticles = JSON.parse(localStorage.getItem('blogArticles') || '[]');
+  let products = JSON.parse(localStorage.getItem('products') || '[]');
+
+  // Fonction pour afficher les articles de blog dans la page (section blog)
+  function renderBlog() {
+    let blogSection = document.getElementById('blog');
+    if (!blogSection) {
+      blogSection = document.createElement('section');
+      blogSection.id = 'blog';
+      blogSection.style.padding = '80px 5%';
+      blogSection.style.background = '#fff';
+      blogSection.style.textAlign = 'center';
+      blogSection.style.maxWidth = '900px';
+      blogSection.style.margin = '40px auto';
+      document.body.insertBefore(blogSection, document.querySelector('.testimonials'));
+    }
+    blogSection.innerHTML = '<h2 style="color: var(--primary); margin-bottom: 30px;">Blog</h2>';
+    if (blogArticles.length === 0) {
+      blogSection.innerHTML += '<p>Aucun article pour le moment.</p>';
+      return;
+    }
+    blogArticles.forEach(article => {
+      const art = document.createElement('article');
+      art.style.marginBottom = '40px';
+      art.innerHTML = `
+        <h3>${article.title}</h3>
+        <small>${article.date}</small>
+        <p>${article.content}</p>
+        ${article.image ? `<img src="${article.image}" alt="${article.title}" style="max-width:100%; border-radius:10px; margin-top:15px;">` : ''}
+      `;
+      blogSection.appendChild(art);
+    });
+  }
+
+  // Fonction pour afficher les produits dans la section boutique
+  function renderProducts() {
+    const boutiqueSection = document.getElementById('boutique');
+    boutiqueSection.innerHTML = `<h2 style="color: var(--primary); margin-bottom: 30px;">Boutique</h2>`;
+    if (products.length === 0) {
+      boutiqueSection.innerHTML += '<p>La boutique sera bientôt disponible.</p>';
+      return;
+    }
+    products.forEach(product => {
+      const prod = document.createElement('div');
+      prod.className = 'product';
+      prod.style.border = '1px solid #ddd';
+      prod.style.borderRadius = '10px';
+      prod.style.padding = '20px';
+      prod.style.marginBottom = '30px';
+      prod.style.maxWidth = '400px';
+      prod.style.margin = '30px auto';
+      prod.innerHTML = `
+        <h3>${product.name} - €${parseFloat(product.price).toFixed(2)}</h3>
+        <p>${product.description}</p>
+        ${product.image ? `<img src="${product.image}" alt="${product.name}" style="max-width:100%; border-radius:10px; margin-top:10px;">` : ''}
+      `;
+      boutiqueSection.appendChild(prod);
+    });
+  }
+
+  // Initial affichage au chargement
+  renderBlog();
+  renderProducts();
+
+  // Gestion ajout article blog
+  document.getElementById('add-blog-btn').addEventListener('click', () => {
+    const title = document.getElementById('blog-title').value.trim();
+    const date = document.getElementById('blog-date').value;
+    const content = document.getElementById('blog-content').value.trim();
+    const image = document.getElementById('blog-image').value.trim();
+
+    if (!title || !date || !content) {
+      alert('Merci de remplir au moins le titre, la date et le contenu.');
+      return;
+    }
+
+    blogArticles.push({ title, date, content, image });
+    localStorage.setItem('blogArticles', JSON.stringify(blogArticles));
+
+    // Reset formulaire
+    document.getElementById('blog-title').value = '';
+    document.getElementById('blog-date').value = '';
+    document.getElementById('blog-content').value = '';
+    document.getElementById('blog-image').value = '';
+
+    renderBlog();
+    alert('Article ajouté avec succès.');
+  });
+
+  // Gestion ajout produit boutique
+  document.getElementById('add-product-btn').addEventListener('click', () => {
+    const name = document.getElementById('product-name').value.trim();
+    const price = document.getElementById('product-price').value;
+    const description = document.getElementById('product-description').value.trim();
+    const image = document.getElementById('product-image').value.trim();
+
+    if (!name || !price || !description) {
+      alert('Merci de remplir au moins le nom, le prix et la description.');
+      return;
+    }
+
+    products.push({ name, price, description, image });
+    localStorage.setItem('products', JSON.stringify(products));
+
+    // Reset formulaire
+    document.getElementById('product-name').value = '';
+    document.getElementById('product-price').value = '';
+    document.getElementById('product-description').value = '';
+    document.getElementById('product-image').value = '';
+
+    renderProducts();
+    alert('Produit ajouté avec succès.');
+  });
+</script>
+
+
 </body>
 </html>
