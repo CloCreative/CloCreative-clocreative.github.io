@@ -1,8 +1,7 @@
 backend:
   name: auth0
-  domain: TON_DOMAINE_AUTH0      # ex: clocreative.us.auth0.com
-  client_id: TON_CLIENT_ID       # depuis l’application Auth0
-  auth_scope: openid profile email
+  domain: TON_DOMAINE_AUTH0
+  client_id: TON_CLIENT_ID
 
 
 media_folder: "assets/uploads"
