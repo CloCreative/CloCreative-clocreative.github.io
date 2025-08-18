@@ -1,0 +1,20 @@
+backend:
+  name: auth0
+  domain: TON_DOMAINE_AUTH0      # ex: clocreative.us.auth0.com
+  client_id: TON_CLIENT_ID       # depuis l’application Auth0
+  auth_scope: openid profile email
+
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "index.html"
+        label: "Page d'accueil"
+        name: "homepage"
+        fields:
+          - { label: "Titre", name: "title", widget: "string" }
+          - { label: "Contenu", name: "body", widget: "markdown" }
