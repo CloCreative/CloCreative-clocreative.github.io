@@ -1,8 +1,6 @@
 backend:
-  name: auth0
-  domain: TON_DOMAINE_AUTH0
-  client_id: TON_CLIENT_ID
-
+  name: git-gateway
+  branch: main
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
@@ -17,3 +15,4 @@ collections:
         fields:
           - { label: "Titre", name: "title", widget: "string" }
           - { label: "Contenu", name: "body", widget: "markdown" }
+
