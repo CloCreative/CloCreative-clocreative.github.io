@@ -1,6 +1,8 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: CloCreative/CloCreative-clocreative.github.io
   branch: main
+  auth_type: implicit
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
@@ -9,7 +11,7 @@ collections:
   - name: "pages"
     label: "Pages"
     files:
-      - file: "index.html"
+      - file: "content/pages/homepage.md"
         label: "Page d'accueil"
         name: "homepage"
         fields:
